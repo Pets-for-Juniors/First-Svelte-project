@@ -1,28 +1,19 @@
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import sveltePreprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [
-		vitePreprocess(),
-		sveltePreprocess({
+		vitePreprocess({
 			scss: {
 				includePaths: ['src/styles']
-			}
+			},
+			typescript: true
 		})
 	],
 
 	kit: {
-		adapter: adapter(),
-		alias: {
-			$api: 'src/api',
-			$assets: 'src/assets',
-			$constants: 'src/constants',
-			$types: 'src/types',
-			$utils: 'src/utils',
-			$ui: 'src/ui'
-		}
+		adapter: adapter()
 	}
 };
 
