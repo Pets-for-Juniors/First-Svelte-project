@@ -14,6 +14,14 @@
 		"forceConsistentCasingInFileNames": true,
 		"outDir": "./build",
 
+		"baseUrl": ".",
+		"paths": {
+			"$lib/*": ["src/lib/*"],
+			"$routes/*": ["src/routes/*"],
+			"$styles/*": ["src/styles/*"],
+			"$api/*": ["src/api/*"]
+		},
+
 		/* Bundler mode */
 		"moduleResolution": "node",
 		"allowImportingTsExtensions": true,
@@ -28,6 +36,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "declaration.d.ts"],
 	"exclude": ["node_modules/*", "public/*"]
 }
