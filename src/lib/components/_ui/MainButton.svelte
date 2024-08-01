@@ -42,7 +42,7 @@
 		box-shadow: 0 4px 8px var(--shadow);
 
 		&:active {
-			transform: translateY(2px);
+			transform: translateY(5px);
 			box-shadow: none;
 		}
 
