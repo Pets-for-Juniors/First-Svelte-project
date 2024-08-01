@@ -1,6 +1,7 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
 	import MainButton from './_ui/MainButton.svelte';
+	import HeaderNav from './HeaderNav.svelte';
 
 	function handleButtonClick() {
 		console.log('Button clicked!');
@@ -12,6 +13,7 @@
 		<img class="logo" src={logo} alt="pets logo" />
 	</div>
 	<MainButton text="Помогаю!" onClick={handleButtonClick} />
+	<HeaderNav />
 </header>
 
 <style lang="scss">

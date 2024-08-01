@@ -26,20 +26,24 @@
 	.button {
 		width: fit-content;
 		padding: 22px 44px;
+
 		font-family: RubikMonoOne-Regular, sans-serif;
 		font-size: var(--medium-text);
 		text-shadow: 0 4px 4px var(--shadow);
 		color: var(--white);
+
 		background-color: var(--green);
 		border: none;
 		border-radius: 15px;
+		box-shadow: 0 4px 8px var(--shadow);
+
 		cursor: pointer;
 		overflow: hidden;
 		position: relative;
+
 		transition:
 			transform 0.1s ease,
 			box-shadow 0.1s ease;
-		box-shadow: 0 4px 8px var(--shadow);
 
 		&:active {
 			transform: translateY(5px);
