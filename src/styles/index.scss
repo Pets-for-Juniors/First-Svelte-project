@@ -1,0 +1,11 @@
+@import './normalize.css';
+@import './global.scss';
+// @import '../lib/assets/fonts/fonts.css';
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--beige);
+}

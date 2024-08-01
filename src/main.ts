@@ -1,7 +1,7 @@
-import App from './components/App.svelte';
-import './styles/global.scss';
+import App from './lib/components/App.svelte';
+import './styles/index.scss';
 
-const target = document.getElementById('app');
+const target = document.getElementById('root');
 if (!target) throw new Error('Root element not found');
 
 const app = new App({
