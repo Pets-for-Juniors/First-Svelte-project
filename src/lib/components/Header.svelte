@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/assets/Header_animation_logo.svg';
+	import logo from '$lib/assets/logo.svg';
 	import MainButton from './_ui/MainButton.svelte';
 
 	function handleButtonClick() {
@@ -8,7 +8,9 @@
 </script>
 
 <header class="header">
-	<img class="logo" src={logo} alt="pets logo" />
+	<div class="logo-container">
+		<img class="logo" src={logo} alt="pets logo" />
+	</div>
 	<MainButton text="Помогаю!" onClick={handleButtonClick} />
 </header>
 
@@ -17,13 +19,24 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 20px;
+		padding: 45px 0;
 		background-color: inherit;
+	}
+
+	.logo-container {
+		width: 145px;
+		height: 83.65px;
+		position: relative;
+		overflow: hidden;
 	}
 
 	.logo {
 		width: 127px;
 		height: 75px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		transition:
 			width 0.3s ease,
 			height 0.3s ease;
