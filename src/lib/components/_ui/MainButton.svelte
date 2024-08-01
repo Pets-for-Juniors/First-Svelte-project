@@ -17,7 +17,7 @@
 <button class="button" on:click={handleClick}>
 	<div class="text-container">
 		{#each text.split('') as letter, index}
-			<span class="letter" style="animation-delay: {index * 0.1}s">{letter}</span>
+			<span class="letter" style="animation-delay: {index * 0.1}s">{letter} </span>
 		{/each}
 	</div>
 </button>
@@ -36,10 +36,14 @@
 		cursor: pointer;
 		overflow: hidden;
 		position: relative;
-		transition: transform 0.1s ease;
+		transition:
+			transform 0.1s ease,
+			box-shadow 0.1s ease;
+		box-shadow: 0 4px 8px var(--shadow);
 
 		&:active {
-			transform: translateY(10px);
+			transform: translateY(2px);
+			box-shadow: none;
 		}
 
 		&:focus {
@@ -70,9 +74,11 @@
 		100% {
 			transform: translateY(0);
 		}
+
 		40% {
 			transform: translateY(-10px);
 		}
+
 		60% {
 			transform: translateY(-5px);
 		}

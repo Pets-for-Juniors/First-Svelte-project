@@ -3,7 +3,7 @@
 	import MainButton from './_ui/MainButton.svelte';
 
 	function handleButtonClick() {
-		alert('Button clicked!');
+		console.log('Button clicked!');
 	}
 </script>
 

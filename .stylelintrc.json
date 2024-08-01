@@ -1,20 +1,15 @@
 {
 	"extends": ["stylelint-config-standard", "stylelint-scss"],
 	"rules": {
-		"block-no-empty": true,
-		"color-no-invalid-hex": true,
-		"declaration-colon-space-before": "always",
-		"indentation": 2,
-		"max-empty-lines": 1,
-		"max-line-length": 80,
+		"no-empty-source": true,
+		"max-nesting-depth": 3,
 		"no-duplicate-selectors": true,
-		"number-leading-zero": "always",
+		"selector-class-pattern": "^[a-z0-9\\-]+$",
 		"property-no-unknown": [
 			true,
 			{
 				"ignoreProperties": ["composes"]
 			}
-		],
-		"selector-max-id": 0
+		]
 	}
 }
