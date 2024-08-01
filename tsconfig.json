@@ -1,5 +1,5 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
+	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 		"checkJs": true,
 		"sourceMap": true,
@@ -13,14 +13,6 @@
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"outDir": "./build",
-
-		"baseUrl": ".",
-		"paths": {
-			"$lib/*": ["src/lib/*"],
-			"$routes/*": ["src/routes/*"],
-			"$styles/*": ["src/styles/*"],
-			"$api/*": ["src/api/*"]
-		},
 
 		/* Bundler mode */
 		"moduleResolution": "node",
@@ -36,6 +28,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src/**/*", "declaration.d.ts"],
+	"include": ["src/**/*", "declaration.d.ts", "types"],
 	"exclude": ["node_modules/*", "public/*"]
 }
