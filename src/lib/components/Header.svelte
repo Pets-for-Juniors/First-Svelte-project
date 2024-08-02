@@ -18,12 +18,13 @@
 
 <style lang="scss">
 	.header {
+		width: 100%;
+		max-width: var(--section-max-width);
 		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 45px 0;
-		background-color: inherit;
 
 		z-index: 10;
 	}
