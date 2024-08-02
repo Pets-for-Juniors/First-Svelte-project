@@ -15,7 +15,7 @@
 </script>
 
 <button class="button" on:click={handleClick}>
-	<div class="text-container">
+	<div class="textСontainer">
 		{#each text.split('') as letter, index}
 			<span class="letter" style="animation-delay: {index * 0.1}s">{letter} </span>
 		{/each}
@@ -55,7 +55,7 @@
 		}
 	}
 
-	.text-container {
+	.textСontainer {
 		display: flex;
 		flex-wrap: nowrap;
 	}

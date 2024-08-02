@@ -9,7 +9,7 @@
 </script>
 
 <header class="header">
-	<div class="logo-container">
+	<div class="logoContainer">
 		<img class="logo" src={logo} alt="pets logo" />
 	</div>
 	<MainButton text="Помогаю!" onClick={handleButtonClick} />
@@ -25,7 +25,7 @@
 		background-color: inherit;
 	}
 
-	.logo-container {
+	.logoContainer {
 		width: 145px;
 		height: 83.65px;
 		position: relative;
