@@ -18,11 +18,14 @@
 
 <style lang="scss">
 	.header {
+		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 45px 0;
 		background-color: inherit;
+
+		z-index: 10;
 	}
 
 	.logoContainer {
