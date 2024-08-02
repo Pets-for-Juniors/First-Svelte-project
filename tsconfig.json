@@ -1,5 +1,5 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
+	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
 		"checkJs": true,
 		"sourceMap": true,
@@ -28,6 +28,6 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "declaration.d.ts", "types"],
 	"exclude": ["node_modules/*", "public/*"]
 }

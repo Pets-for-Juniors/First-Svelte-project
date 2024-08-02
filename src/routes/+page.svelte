@@ -1,7 +1,5 @@
 <script lang="ts">
-  import App from '../components/App.svelte';
-  
-  let name = 'world';
+	import Header from '../lib/components/Header.svelte';
 </script>
 
-<App name={name} />
+<Header />

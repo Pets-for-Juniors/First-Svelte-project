@@ -1,0 +1,17 @@
+{
+	"extends": ["stylelint-config-standard", "stylelint-scss"],
+	"rules": {
+		"no-empty-source": true,
+		"max-nesting-depth": 3,
+		"no-duplicate-selectors": true,
+		"selector-class-pattern": "^[a-z0-9\\-]+$",
+		"import-notation": "string",
+		"declaration-empty-line-before": null,
+		"property-no-unknown": [
+			true,
+			{
+				"ignoreProperties": ["composes"]
+			}
+		]
+	}
+}
