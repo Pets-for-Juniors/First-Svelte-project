@@ -45,10 +45,10 @@
 		transition:
 			width 0.3s ease,
 			height 0.3s ease;
-	}
 
-	.logo:hover {
-		width: 145px;
-		height: 83.65px;
+		&:hover {
+			width: 145px;
+			height: 83.65px;
+		}
 	}
 </style>

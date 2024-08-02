@@ -79,10 +79,10 @@
 		font-size: var(--large-text);
 		letter-spacing: calc(var(--large-text) * (-0.02));
 		color: var(--white);
-	}
 
-	.text span {
-		color: var(--dark-blue);
+		span {
+			color: var(--dark-blue);
+		}
 	}
 
 	.animalsImg {

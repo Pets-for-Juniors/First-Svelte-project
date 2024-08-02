@@ -53,6 +53,12 @@
 		&:focus {
 			outline: none;
 		}
+
+		&:hover {
+			.letter {
+				animation: bounce 0.6s ease-in-out;
+			}
+		}
 	}
 
 	.textСontainer {
@@ -64,10 +70,6 @@
 		display: inline-block;
 		margin-right: calc(var(--medium-text) * 0.08);
 		transition: transform 0.3s ease;
-	}
-
-	.button:hover .letter {
-		animation: bounce 0.6s ease-in-out;
 	}
 
 	@keyframes bounce {
