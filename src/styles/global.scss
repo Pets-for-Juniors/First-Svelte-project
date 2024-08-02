@@ -3,12 +3,18 @@
 	--beige: #fff2cb;
 	--green: #4cb843;
 	--white: #fff;
-	--shadow: rgb(0 0 0 / 25%);
+	--amber: #ffbf00;
 	--dark-blue: #114c70;
+	--shadow: rgb(0 0 0 / 25%);
+	--linear-turquoise: linear-gradient(-90deg, #fff2cb 0%, #189cab 100%);
 
 	/* Font sizes */
 	--small-text: 18px;
 	--medium-text: 24px;
 	--large-text: 32px;
 	--extra-large-text: 48px;
+
+	/* Elements */
+	--border-radius-button: 15px;
+	--border-radius-section: 25px;
 }

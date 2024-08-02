@@ -34,7 +34,7 @@
 
 		background-color: var(--green);
 		border: none;
-		border-radius: 15px;
+		border-radius: var(--border-radius-button);
 		box-shadow: 0 4px 8px var(--shadow);
 
 		cursor: pointer;
