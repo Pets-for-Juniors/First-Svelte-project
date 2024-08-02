@@ -15,6 +15,7 @@
 	--extra-large-text: 48px;
 
 	/* Elements */
+	--section-max-width: calc(1920px - (188px * 2));
 	--border-radius-button: 15px;
 	--border-radius-section: 25px;
 }
