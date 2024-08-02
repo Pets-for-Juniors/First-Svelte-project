@@ -5,7 +5,7 @@
 </script>
 
 <section class="promo">
-	<img src={treeImage} class="tree" alt="tree" />
+	<img src={treeImage} class="tree" alt="Дерево" />
 	<div class="content">
 		<div class="textContainer">
 			<h1 class="title">Приют “Петы”</h1>
@@ -15,7 +15,7 @@
 			</p>
 		</div>
 
-		<img src={houseImage} class="house" alt="house" />
+		<img src={houseImage} class="house" alt="Домик" />
 		<img src={dogAndCatImage} class="animalsImg" alt="Кошка и собака" />
 	</div>
 </section>

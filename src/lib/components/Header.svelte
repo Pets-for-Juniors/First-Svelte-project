@@ -10,7 +10,7 @@
 
 <header class="header">
 	<div class="logoContainer">
-		<img class="logo" src={logo} alt="pets logo" />
+		<img class="logo" src={logo} alt="Логотип приюта Петс" />
 	</div>
 	<MainButton text="Помогаю!" onClick={handleButtonClick} />
 	<HeaderNav />
