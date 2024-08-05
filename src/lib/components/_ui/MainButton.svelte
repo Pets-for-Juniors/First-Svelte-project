@@ -2,22 +2,18 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let text: string;
-	export let onClick: () => void;
 
 	const dispatch = createEventDispatcher();
 
 	function handleClick() {
-		if (onClick) {
-			onClick();
-		}
 		dispatch('click');
 	}
 </script>
 
 <button class="button" on:click={handleClick}>
-	<div class="textСontainer">
+	<div class="textContainer">
 		{#each text.split('') as letter, index}
-			<span class="letter" style="animation-delay: {index * 0.1}s">{letter} </span>
+			<span class="letter" style="animation-delay: {index * 0.1}s">{letter}</span>
 		{/each}
 	</div>
 </button>
@@ -54,14 +50,12 @@
 			outline: none;
 		}
 
-		&:hover {
-			.letter {
-				animation: bounce 0.6s ease-in-out;
-			}
+		&:hover .letter {
+			animation: bounce 0.6s ease-in-out;
 		}
 	}
 
-	.textСontainer {
+	.textContainer {
 		display: flex;
 		flex-wrap: nowrap;
 	}

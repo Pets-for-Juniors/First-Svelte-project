@@ -3,12 +3,24 @@
 	import Main from '$lib/components/Main.svelte';
 	import PopupHelp from '$lib/components/PopupHelp.svelte';
 	import Promo from '$lib/components/Promo.svelte';
+
+	let isOpen = false;
+
+	const openPopupHelp = () => {
+		isOpen = true;
+	};
+
+	const closePopupHelp = () => {
+		isOpen = false;
+	};
 </script>
 
-<Header />
+<Header on:openPopupHelp={openPopupHelp} />
 
 <Main>
 	<Promo />
 
-	<PopupHelp isOpen={true} onClose={() => {}} />
+	<PopupHelp {isOpen} onClose={closePopupHelp} />
 </Main>
+
+<style lang="scss"></style>

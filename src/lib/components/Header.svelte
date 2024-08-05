@@ -1,10 +1,13 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
+	import { createEventDispatcher } from 'svelte';
 	import MainButton from './_ui/MainButton.svelte';
 	import HeaderNav from './HeaderNav.svelte';
 
+	const dispatch = createEventDispatcher();
+
 	function handleButtonClick() {
-		console.log('Button clicked!');
+		dispatch('openPopupHelp');
 	}
 </script>
 
@@ -12,7 +15,7 @@
 	<div class="logoContainer">
 		<img class="logo" src={logo} alt="Логотип приюта Петс" />
 	</div>
-	<MainButton text="Помогаю!" onClick={handleButtonClick} />
+	<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	<HeaderNav />
 </header>
 

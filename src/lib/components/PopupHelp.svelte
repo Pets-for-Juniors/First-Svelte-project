@@ -2,7 +2,7 @@
 	import logo from '$lib/assets/logo.svg';
 	import Overlay from './Overlay.svelte';
 
-	export let isOpen: boolean = true;
+	export let isOpen: boolean;
 	export let onClose: () => void;
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
 	export let isOpen: boolean;
 	export let onClose: () => void;
@@ -13,9 +13,9 @@
 	onMount(() => {
 		document.addEventListener('keydown', handleEscClose);
 
-		onDestroy(() => {
+		return () => {
 			document.removeEventListener('keydown', handleEscClose);
-		});
+		};
 	});
 </script>
 
