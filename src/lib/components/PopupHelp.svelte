@@ -1,5 +1,6 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
+	import { scale } from 'svelte/transition';
 	import Overlay from './Overlay.svelte';
 
 	export let isOpen: boolean;
@@ -8,7 +9,7 @@
 
 {#if isOpen}
 	<Overlay {isOpen} {onClose}>
-		<div class="popup" on:click|stopPropagation>
+		<div class="popup" transition:scale={{ duration: 300 }} on:click|stopPropagation>
 			<p class="text">Спасибо за <span>интерес</span> к <span>нашему проекту!</span></p>
 			<img class="img" src={logo} alt="Логотип приюта Петс" />
 		</div>
