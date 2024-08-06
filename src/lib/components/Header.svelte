@@ -1,12 +1,17 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
 	import PopupHelp from '$lib/components/PopupHelp.svelte';
-	import { isPopupHelpOpen } from '$lib/store';
 	import MainButton from './_ui/MainButton.svelte';
 	import HeaderNav from './HeaderNav.svelte';
 
+	let isPopupHelpOpen = false;
+
 	function handleButtonClick() {
-		isPopupHelpOpen.set(true);
+		isPopupHelpOpen = true;
+	}
+
+	function closePopupHelp() {
+		isPopupHelpOpen = false;
 	}
 </script>
 
@@ -16,7 +21,7 @@
 	</div>
 	<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	<HeaderNav />
-	<PopupHelp />
+	<PopupHelp {isPopupHelpOpen} onClose={closePopupHelp} />
 </header>
 
 <style lang="scss">

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	export let isOpen: boolean;
 	export let onClose: () => void;
 
 	const handleEscClose = (e: KeyboardEvent) => {
@@ -20,7 +19,7 @@
 </script>
 
 <div
-	class={`overlay ${isOpen ? 'overlayOpen' : ''}`}
+	class="overlay"
 	on:click={(e) => {
 		if (e.currentTarget === e.target) {
 			onClose();
@@ -36,25 +35,18 @@
 		z-index: 11;
 		top: 0;
 		left: 0;
-
 		overflow: auto;
 		display: flex;
 		justify-content: center;
-
 		box-sizing: border-box;
 		width: 100%;
 		height: 100vh;
 		padding: 0;
-
-		visibility: hidden;
 		background-color: var(--shadow);
+		visibility: visible;
 
 		&::-webkit-scrollbar {
 			display: none;
-		}
-
-		&.overlayOpen {
-			visibility: visible;
 		}
 	}
 </style>
