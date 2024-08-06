@@ -1,14 +1,16 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
+	import { isPopupHelpOpen } from '$lib/store';
 	import { scale } from 'svelte/transition';
 	import Overlay from './Overlay.svelte';
 
-	export let isOpen: boolean;
-	export let onClose: () => void;
+	const closePopupHelp = () => {
+		isPopupHelpOpen.set(false);
+	};
 </script>
 
-{#if isOpen}
-	<Overlay {isOpen} {onClose}>
+{#if $isPopupHelpOpen}
+	<Overlay onClose={closePopupHelp} isOpen={$isPopupHelpOpen}>
 		<div class="popup" transition:scale={{ duration: 300 }} on:click|stopPropagation>
 			<p class="text">Спасибо за <span>интерес</span> к <span>нашему проекту!</span></p>
 			<img class="img" src={logo} alt="Логотип приюта Петс" />
@@ -22,16 +24,12 @@
 		max-width: 1319px;
 		max-height: 702px;
 		margin: 100px auto;
-
 		display: flex;
 		flex-direction: column;
 		position: relative;
-
 		align-items: center;
-
 		background: var(--white);
 		border-radius: var(--border-radius-section);
-
 		overflow: clip;
 	}
 

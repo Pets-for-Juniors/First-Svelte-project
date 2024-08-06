@@ -1,13 +1,12 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
-	import { createEventDispatcher } from 'svelte';
+	import PopupHelp from '$lib/components/PopupHelp.svelte';
+	import { isPopupHelpOpen } from '$lib/store';
 	import MainButton from './_ui/MainButton.svelte';
 	import HeaderNav from './HeaderNav.svelte';
 
-	const dispatch = createEventDispatcher();
-
 	function handleButtonClick() {
-		dispatch('openPopupHelp');
+		isPopupHelpOpen.set(true);
 	}
 </script>
 
@@ -17,6 +16,7 @@
 	</div>
 	<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	<HeaderNav />
+	<PopupHelp />
 </header>
 
 <style lang="scss">
@@ -28,7 +28,6 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 45px 0;
-
 		z-index: 10;
 	}
 
