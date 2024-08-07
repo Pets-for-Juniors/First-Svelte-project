@@ -27,7 +27,7 @@
 	}
 
 	.anchor {
-		font-family: Inter-SemiBold, sans-serif;
+		font-family: Inter-Bold, sans-serif;
 		font-size: var(--small-text);
 		letter-spacing: calc(var(--small-text) * 0.08);
 		color: var(--dark-blue);

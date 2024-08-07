@@ -23,6 +23,7 @@
 <style lang="scss">
 	.promo {
 		width: 100%;
+		max-width: var(--section-max-width);
 
 		padding: 60px 0 75px;
 		display: flex;
@@ -72,6 +73,8 @@
 		font-size: var(--extra-large-text);
 		letter-spacing: calc(var(--extra-large-text) * 0.08);
 		color: var(--amber);
+
+		text-shadow: 0 4px 4px var(--shadow);
 	}
 
 	.text {
@@ -79,10 +82,12 @@
 		font-size: var(--large-text);
 		letter-spacing: calc(var(--large-text) * (-0.02));
 		color: var(--white);
-	}
 
-	.text span {
-		color: var(--dark-blue);
+		text-shadow: 0 4px 4px var(--shadow);
+
+		span {
+			color: var(--dark-blue);
+		}
 	}
 
 	.animalsImg {

@@ -1,10 +1,17 @@
 <script lang="ts">
 	import logo from '$lib/assets/logo.svg';
+	import PopupHelp from '$lib/components/PopupHelp.svelte';
 	import MainButton from './_ui/MainButton.svelte';
 	import HeaderNav from './HeaderNav.svelte';
 
+	let isPopupHelpOpen = false;
+
 	function handleButtonClick() {
-		console.log('Button clicked!');
+		isPopupHelpOpen = true;
+	}
+
+	function closePopupHelp() {
+		isPopupHelpOpen = false;
 	}
 </script>
 
@@ -12,19 +19,20 @@
 	<div class="logoContainer">
 		<img class="logo" src={logo} alt="Логотип приюта Петс" />
 	</div>
-	<MainButton text="Помогаю!" onClick={handleButtonClick} />
+	<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	<HeaderNav />
+	<PopupHelp {isPopupHelpOpen} onClose={closePopupHelp} />
 </header>
 
 <style lang="scss">
 	.header {
+		width: 100%;
+		max-width: var(--section-max-width);
 		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		padding: 45px 0;
-		background-color: inherit;
-
 		z-index: 10;
 	}
 
@@ -45,10 +53,10 @@
 		transition:
 			width 0.3s ease,
 			height 0.3s ease;
-	}
 
-	.logo:hover {
-		width: 145px;
-		height: 83.65px;
+		&:hover {
+			width: 145px;
+			height: 83.65px;
+		}
 	}
 </style>
