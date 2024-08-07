@@ -16,10 +16,12 @@
 </script>
 
 <header class="header">
-	<div class="logoContainer">
-		<img class="logo" src={logo} alt="Логотип приюта Петс" />
+	<div class="wrapper">
+		<div class="logoContainer">
+			<img class="logo" src={logo} alt="Логотип приюта Петс" />
+		</div>
+		<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	</div>
-	<MainButton text="Помогаю!" on:click={handleButtonClick} />
 	<HeaderNav />
 	<PopupHelp {isPopupHelpOpen} onClose={closePopupHelp} />
 </header>
@@ -33,7 +35,12 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 45px 0;
+
 		z-index: 10;
+	}
+
+	.wrapper {
+		display: flex;
 	}
 
 	.logoContainer {
@@ -41,6 +48,8 @@
 		height: 83.65px;
 		position: relative;
 		overflow: hidden;
+
+		margin-right: 79px;
 	}
 
 	.logo {
