@@ -60,21 +60,28 @@
 	}
 
 	.textContainer {
-		width: 39%;
+		width: 50%;
 		display: flex;
 		flex-direction: column;
 		margin-left: 30px;
 		text-align: left;
 		justify-content: center;
+
+		gap: 20px;
+
+		z-index: 4;
 	}
 
 	.title {
 		font-family: RubikMonoOne-Regular, sans-serif;
-		font-size: var(--extra-large-text);
+		font-size: 60px;
 		letter-spacing: calc(var(--extra-large-text) * 0.08);
 		color: var(--amber);
 
-		text-shadow: 0 4px 4px var(--shadow);
+		text-shadow: 4px 8px 4px rgb(0, 0, 0, 0.5);
+
+		// position: absolute;
+		// top: 150px;
 	}
 
 	.text {
@@ -82,8 +89,6 @@
 		font-size: var(--large-text);
 		letter-spacing: calc(var(--large-text) * (-0.02));
 		color: var(--white);
-
-		text-shadow: 0 4px 4px var(--shadow);
 
 		span {
 			color: var(--dark-blue);

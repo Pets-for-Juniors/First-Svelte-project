@@ -32,5 +32,14 @@
 		letter-spacing: calc(var(--small-text) * 0.08);
 		color: var(--dark-blue);
 		text-decoration: none;
+
+		transition:
+			font-size 0.3s ease-in-out,
+			color 0.3s ease-in-out;
+
+		&:hover {
+			color: var(--white);
+			font-size: var(--medium-text);
+		}
 	}
 </style>
