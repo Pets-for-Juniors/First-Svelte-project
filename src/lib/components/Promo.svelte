@@ -79,9 +79,6 @@
 		color: var(--amber);
 
 		text-shadow: 4px 8px 4px rgb(0, 0, 0, 0.5);
-
-		// position: absolute;
-		// top: 150px;
 	}
 
 	.text {
