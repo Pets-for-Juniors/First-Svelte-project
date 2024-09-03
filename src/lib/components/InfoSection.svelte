@@ -1,4 +1,6 @@
 <script lang="ts">
+	import catWithHand from '$lib/assets/images/cat_with_hand.png';
+	import girlWithDog from '$lib/assets/images/girl_with_dog.png';
 </script>
 
 <section class="infoSection">
@@ -13,7 +15,13 @@
 				<li class="item">“Правила усыновления животных из приюта”</li>
 				<li class="item">“Возможные сложности содержания домашнего питомца”</li>
 			</ol>
+			<img
+				src={catWithHand}
+				class="catWithHand"
+				alt="Кот, показывающий вверх указательным пальцем"
+			/>
 		</div>
+		<img src={girlWithDog} class="girlWithDog" alt="Девушка с собакой" />
 	</div>
 </section>
 
@@ -40,7 +48,6 @@
 		max-width: var(--section-max-width);
 		margin-top: 75px;
 		display: flex;
-		flex-direction: column;
 		align-items: left;
 		text-align: left;
 		gap: 45px;
@@ -76,5 +83,14 @@
 		font-family: Inter-LightItalic, sans-serif;
 		text-decoration: underline;
 		text-underline-offset: 10px;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.catWithHand {
+		margin-top: 76px;
+		margin-left: 95px;
 	}
 </style>
