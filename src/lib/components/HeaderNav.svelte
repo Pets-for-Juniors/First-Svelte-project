@@ -16,14 +16,20 @@
 	}
 
 	.list {
-		list-style: none;
+		width: 100%;
+
+		padding: 0;
+		margin: 0;
+
 		display: flex;
 		gap: 80px;
+		list-style: none;
 		text-decoration: none;
 	}
 
 	.item {
 		display: flex;
+		width: fit-content;
 	}
 
 	.anchor {
@@ -34,12 +40,12 @@
 		text-decoration: none;
 
 		transition:
-			font-size 0.3s ease-in-out,
+			transform 0.3s ease-in-out,
 			color 0.3s ease-in-out;
 
 		&:hover {
 			color: var(--white);
-			font-size: var(--medium-text);
+			transform: scale(1.2);
 		}
 	}
 </style>
