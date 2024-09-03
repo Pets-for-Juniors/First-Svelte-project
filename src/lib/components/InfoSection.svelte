@@ -50,12 +50,11 @@
 		display: flex;
 		align-items: left;
 		text-align: left;
-		gap: 45px;
 	}
 
 	.textContainer {
 		width: 100%;
-		max-width: 870px;
+		max-width: 945px;
 	}
 
 	.text {
@@ -66,12 +65,12 @@
 	}
 
 	.list {
-		margin: 0;
+		margin-top: 45px;
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 30px;
-		font-family: Inter-SemiBold, sans-serif;
+		gap: 20px;
+		font-family: Inter-Regular, sans-serif;
 		font-size: var(--small-text);
 		letter-spacing: calc(var(--small-text) * 0.08);
 		color: var(--white);
@@ -81,11 +80,19 @@
 
 	.item {
 		font-family: Inter-LightItalic, sans-serif;
+		position: relative;
+		transition:
+			text-decoration-color 0.3s ease,
+			text-underline-offset 0.3s ease;
+
 		text-decoration: underline;
-		text-underline-offset: 10px;
+		text-decoration-color: transparent;
+		text-underline-offset: 0;
 
 		&:hover {
 			cursor: pointer;
+			text-decoration-color: currentColor;
+			text-underline-offset: 10px;
 		}
 	}
 
