@@ -4,7 +4,7 @@ export type Animal = {
 	breed: string;
 	name: string;
 	age: number;
-	gender: string;
+	sex: string;
 	description: string;
 	image: string;
 };
