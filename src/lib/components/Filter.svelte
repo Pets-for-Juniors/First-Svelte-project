@@ -15,7 +15,9 @@
 
 	onMount(async () => {
 		try {
-			animals = await fetchAnimals();
+			const response = await fetchAnimals();
+			animals = response.data;
+			console.log(animals);
 			types = [...new Set(animals.map((animal) => animal.type))];
 			genders = [...new Set(animals.map((animal) => animal.sex))];
 			ages = [...new Set(animals.map((animal) => animal.age.toString()))];

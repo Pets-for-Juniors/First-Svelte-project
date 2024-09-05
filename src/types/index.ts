@@ -6,5 +6,5 @@ export type Animal = {
 	age: number;
 	sex: string;
 	description: string;
-	image: string;
+	images: string;
 };
