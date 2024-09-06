@@ -15,7 +15,7 @@
 
 		<p class="text">Воспользуйтесь фильтром, чтобы найти идеального друга!</p>
 
-		<ImageGallery {animalsPerPage} filteredAnimals={$filteredAnimals} />
+		<ImageGallery {animalsPerPage} {filteredAnimals} />
 	</div>
 </section>
 

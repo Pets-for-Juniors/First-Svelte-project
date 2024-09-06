@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { API_BASE_URL } from '../../constants/externalLinks';
+
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fetchAnimals } from '../../api/api';
@@ -6,7 +8,6 @@
 
 	export let animals: Animal[] = [];
 	export let filteredAnimals = writable<Animal[]>([]);
-	export let currentPage = writable(1);
 
 	let types: string[] = [];
 	let genders: string[] = [];
@@ -17,7 +18,7 @@
 		try {
 			const response = await fetchAnimals();
 			animals = response.data;
-			console.log(animals);
+			// console.log(animals);
 			types = [...new Set(animals.map((animal) => animal.type))];
 			genders = [...new Set(animals.map((animal) => animal.sex))];
 			ages = [...new Set(animals.map((animal) => animal.age.toString()))];
@@ -28,8 +29,9 @@
 		}
 	});
 
-	function filterAnimals(event: Event) {
+	async function filterAnimals(event: Event) {
 		event.preventDefault();
+
 		const filters = {
 			type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
 			gender: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
@@ -37,16 +39,21 @@
 			breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
 		};
 
-		currentPage.set(1);
-		filteredAnimals.set(
-			animals.filter(
-				(animal) =>
-					(!filters.type || animal.type === filters.type) &&
-					(!filters.gender || animal.sex === filters.gender) &&
-					(!filters.age || animal.age === Number(filters.age)) &&
-					(!filters.breed || animal.breed === filters.breed)
-			)
-		);
+		let query = [];
+		if (filters.type) query.push(`type=${filters.type}`);
+		if (filters.gender) query.push(`gender=${filters.gender}`);
+		if (filters.age) query.push(`age=${filters.age}`);
+		if (filters.breed) query.push(`breed=${filters.breed}`);
+
+		const queryString = query.length ? `?${query.join('&')}` : '';
+
+		try {
+			const response = await fetch(`${API_BASE_URL}/api/pets/filter/${queryString}`);
+			const data = await response.json();
+			filteredAnimals.set(data);
+		} catch (error) {
+			console.error('Ошибка при загрузке данных:', error);
+		}
 	}
 </script>
 

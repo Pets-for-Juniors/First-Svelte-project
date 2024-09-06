@@ -7,9 +7,14 @@
 
 	export let animalsPerPage: number = 8;
 	export let animals = writable<Animal[]>([]);
+	export let filteredAnimals = writable<Animal[]>([]);
 	export let currentPage = writable(1);
 
 	let totalPages = 1;
+
+	onMount(async () => {
+		await loadAnimals($currentPage);
+	});
 
 	const loadAnimals = async (page: number) => {
 		try {
@@ -21,21 +26,36 @@
 		}
 	};
 
-	onMount(async () => {
-		await loadAnimals($currentPage);
-	});
+	async function loadFilteredAnimals(page: number) {
+		try {
+			const response = await fetch(
+				`${API_BASE_URL}/api/pets/filter/?page=${page}&limit=${animalsPerPage}`
+			);
+
+			if (!response.ok) {
+				throw new Error(`Ошибка HTTP: ${response.status}`);
+			}
+
+			const data = await response.json();
+
+			filteredAnimals.set(data.results);
+			totalPages = Math.ceil(data.count / animalsPerPage);
+		} catch (error) {
+			console.error('Ошибка при загрузке данных:', error);
+		}
+	}
 
 	function prevPage() {
 		if ($currentPage > 1) {
 			currentPage.update((n) => n - 1);
-			loadAnimals($currentPage);
+			loadFilteredAnimals($currentPage);
 		}
 	}
 
 	function nextPage() {
 		if ($currentPage < totalPages) {
 			currentPage.update((n) => n + 1);
-			loadAnimals($currentPage);
+			loadFilteredAnimals($currentPage);
 		}
 	}
 </script>
