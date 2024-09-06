@@ -10,7 +10,7 @@
 	export let filteredAnimals = writable<Animal[]>([]);
 
 	let types: string[] = [];
-	let sexs: string[] = [];
+	let sexes: string[] = [];
 	let ages: string[] = [];
 	let breeds: string[] = [];
 
@@ -19,7 +19,7 @@
 			const response = await fetchAnimals();
 			animals = response.data;
 			types = [...new Set(animals.map((animal) => animal.type))];
-			sexs = [...new Set(animals.map((animal) => animal.sex))];
+			sexes = [...new Set(animals.map((animal) => animal.sex))];
 			ages = [...new Set(animals.map((animal) => animal.age.toString()))];
 			breeds = [...new Set(animals.map((animal) => animal.breed))];
 			filteredAnimals.set(animals);
@@ -70,7 +70,7 @@
 	<div class="selectWrapper">
 		<select class="select" name="Пол">
 			<option value="">Пол</option>
-			{#each sexs as sex}
+			{#each sexes as sex}
 				<option value={sex}>{sex}</option>
 			{/each}
 		</select>
