@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fetchAnimals } from '../../api/api';
+	import { API_BASE_URL } from '../../constants/externalLinks';
 	import type { Animal } from '../../types/index';
 
 	export let animalsPerPage: number = 8;
@@ -17,7 +18,8 @@
 	async function loadFilteredAnimals(offset: number) {
 		try {
 			const data = await fetchAnimals(offset, animalsPerPage);
-			filteredAnimals.set(data.results || []);
+			filteredAnimals.set(data.data || []);
+			console.log('галерея ', data.data);
 			totalItems = data.count || 0;
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
@@ -44,7 +46,7 @@
 
 	{#if $filteredAnimals && $filteredAnimals.length > 0}
 		{#each $filteredAnimals as animal (animal.id)}
-			<img src={`${animal.images}`} alt={animal.type} class="image" />
+			<img src={`${API_BASE_URL}/${animal.images}`} alt={animal.type} class="image" />
 		{/each}
 	{:else}
 		<p>Загрузка...</p>

@@ -10,7 +10,7 @@
 	export let filteredAnimals = writable<Animal[]>([]);
 
 	let types: string[] = [];
-	let genders: string[] = [];
+	let sexs: string[] = [];
 	let ages: string[] = [];
 	let breeds: string[] = [];
 
@@ -19,7 +19,7 @@
 			const response = await fetchAnimals();
 			animals = response.data;
 			types = [...new Set(animals.map((animal) => animal.type))];
-			genders = [...new Set(animals.map((animal) => animal.sex))];
+			sexs = [...new Set(animals.map((animal) => animal.sex))];
 			ages = [...new Set(animals.map((animal) => animal.age.toString()))];
 			breeds = [...new Set(animals.map((animal) => animal.breed))];
 			filteredAnimals.set(animals);
@@ -33,14 +33,14 @@
 
 		const filters = {
 			type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
-			gender: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
+			sex: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
 			age: (document.querySelector('select[name="Возраст"]') as HTMLSelectElement).value,
 			breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
 		};
 
 		let query = [];
 		if (filters.type) query.push(`type=${filters.type}`);
-		if (filters.gender) query.push(`gender=${filters.gender}`);
+		if (filters.sex) query.push(`sex=${filters.sex}`);
 		if (filters.age) query.push(`age=${filters.age}`);
 		if (filters.breed) query.push(`breed=${filters.breed}`);
 
@@ -49,7 +49,8 @@
 		try {
 			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
 			const data = await response.json();
-			filteredAnimals.set(data);
+			filteredAnimals.set(data.data || []);
+			console.log('фильтр ', data.data);
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
 		}
@@ -69,8 +70,8 @@
 	<div class="selectWrapper">
 		<select class="select" name="Пол">
 			<option value="">Пол</option>
-			{#each genders as gender}
-				<option value={gender}>{gender}</option>
+			{#each sexs as sex}
+				<option value={sex}>{sex}</option>
 			{/each}
 		</select>
 	</div>
