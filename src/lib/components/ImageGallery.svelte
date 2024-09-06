@@ -2,76 +2,59 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fetchAnimals } from '../../api/api';
-	import { API_BASE_URL } from '../../constants/externalLinks';
 	import type { Animal } from '../../types/index';
 
 	export let animalsPerPage: number = 8;
-	export let animals = writable<Animal[]>([]);
 	export let filteredAnimals = writable<Animal[]>([]);
-	export let currentPage = writable(1);
+	export let currentOffset = writable(0);
 
-	let totalPages = 1;
+	let totalItems = 0;
 
 	onMount(async () => {
-		await loadAnimals($currentPage);
+		await loadFilteredAnimals($currentOffset);
 	});
 
-	const loadAnimals = async (page: number) => {
+	async function loadFilteredAnimals(offset: number) {
 		try {
-			const response = await fetchAnimals(page, animalsPerPage);
-			animals.set(response.data);
-			totalPages = Math.ceil(response.count / animalsPerPage);
-		} catch (error) {
-			console.error('Не удалось загрузить и обработать данные:', error);
-		}
-	};
-
-	async function loadFilteredAnimals(page: number) {
-		try {
-			const response = await fetch(
-				`${API_BASE_URL}/api/pets/?page=${page}&limit=${animalsPerPage}`
-			);
-
-			if (!response.ok) {
-				throw new Error(`Ошибка HTTP: ${response.status}`);
-			}
-
-			const data = await response.json();
-
-			filteredAnimals.set(data.results);
-			totalPages = Math.ceil(data.count / animalsPerPage);
+			const data = await fetchAnimals(offset, animalsPerPage);
+			filteredAnimals.set(data.results || []);
+			totalItems = data.count || 0;
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
 		}
 	}
 
 	function prevPage() {
-		if ($currentPage > 1) {
-			currentPage.update((n) => n - 1);
-			loadFilteredAnimals($currentPage);
+		if ($currentOffset > 0) {
+			currentOffset.update((n) => n - animalsPerPage);
+			loadFilteredAnimals($currentOffset);
 		}
 	}
 
 	function nextPage() {
-		if ($currentPage < totalPages) {
-			currentPage.update((n) => n + 1);
-			loadFilteredAnimals($currentPage);
+		if ($currentOffset + animalsPerPage < totalItems) {
+			currentOffset.update((n) => n + animalsPerPage);
+			loadFilteredAnimals($currentOffset);
 		}
 	}
 </script>
 
 <div class="imagesContainer">
-	<button class="prevButton" on:click={prevPage} disabled={$currentPage === 1}></button>
+	<button class="prevButton" on:click={prevPage} disabled={$currentOffset === 0}></button>
 
-	{#if $animals.length === 0}
+	{#if $filteredAnimals && $filteredAnimals.length > 0}
+		{#each $filteredAnimals as animal (animal.id)}
+			<img src={`${animal.images}`} alt={animal.type} class="image" />
+		{/each}
+	{:else}
 		<p>Загрузка...</p>
 	{/if}
 
-	{#each $animals as animal (animal.id)}
-		<img src={`${API_BASE_URL}${animal.images}`} alt={animal.type} class="image" />
-	{/each}
-
-	<button class="nextButton" on:click={nextPage} disabled={$currentPage === totalPages}></button>
+	<button
+		class="nextButton"
+		on:click={nextPage}
+		disabled={$currentOffset + animalsPerPage >= totalItems}
+	></button>
 </div>
 
 <style lang="scss">
