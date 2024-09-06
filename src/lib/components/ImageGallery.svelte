@@ -29,7 +29,7 @@
 	async function loadFilteredAnimals(page: number) {
 		try {
 			const response = await fetch(
-				`${API_BASE_URL}/api/pets/filter/?page=${page}&limit=${animalsPerPage}`
+				`${API_BASE_URL}/api/pets/?page=${page}&limit=${animalsPerPage}`
 			);
 
 			if (!response.ok) {

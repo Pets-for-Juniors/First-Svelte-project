@@ -48,7 +48,7 @@
 		const queryString = query.length ? `?${query.join('&')}` : '';
 
 		try {
-			const response = await fetch(`${API_BASE_URL}/api/pets/filter/${queryString}`);
+			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
 			const data = await response.json();
 			filteredAnimals.set(data);
 		} catch (error) {
