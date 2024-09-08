@@ -71,7 +71,7 @@
 	.image {
 		width: 125px;
 
-		margin-right: 32px;
+		margin: 0 16px;
 
 		aspect-ratio: 1 / 1;
 
@@ -80,10 +80,6 @@
 		border-radius: 50%;
 
 		transition: all 0.3s ease;
-
-		&:last-child {
-			margin-right: 0;
-		}
 
 		&:hover {
 			cursor: pointer;
