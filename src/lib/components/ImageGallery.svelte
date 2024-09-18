@@ -46,7 +46,7 @@
 
 	{#if $filteredAnimals && $filteredAnimals.length > 0}
 		{#each $filteredAnimals as animal (animal.id)}
-			<img src={`${API_BASE_URL}/${animal.images}`} alt={animal.type} class="image" />
+			<img src={`${API_BASE_URL}${animal.images}`} alt={animal.type} class="image" />
 		{/each}
 	{:else}
 		<p>Загрузка...</p>
