@@ -4,8 +4,7 @@
 	import { getAnimalAges, getAnimalBreeds, getAnimalGenders, getAnimalTypes } from '../../api/api';
 	import type { AnimalAge, AnimalBreed, AnimalGender, AnimalType } from '../../types/index';
 
-	// export let animals: Animal[] = [];
-	// export let filteredAnimals = writable<Animal[]>([]);
+	export let onFilterChange = () => {};
 
 	let types: AnimalType[] = [];
 	let sexes: AnimalGender[] = [];
@@ -22,38 +21,9 @@
 			console.error('Не удалось загрузить и обработать данные:', error);
 		}
 	});
-
-	// async function filterAnimals(event: Event) {
-	// 	event.preventDefault();
-
-	// 	const filters = {
-	// 		type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
-	// 		sex: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
-	// 		age: (document.querySelector('select[name="Возраст"]') as HTMLSelectElement).value,
-	// 		breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
-	// 	};
-
-	// 	let query = [];
-	// 	if (filters.type) query.push(`type=${filters.type}`);
-	// 	if (filters.sex) query.push(`sex=${filters.sex}`);
-	// 	if (filters.age) query.push(`age=${filters.age}`);
-	// 	if (filters.breed) query.push(`breed=${filters.breed}`);
-
-	// 	const queryString = query.length ? `?${query.join('&')}` : '';
-
-	// 	try {
-	// 		const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
-	// 		const data = await response.json();
-	// 		filteredAnimals.set(data.data || []);
-	// 		console.log('фильтр ', data.data);
-	// 	} catch (error) {
-	// 		console.error('Ошибка при загрузке данных:', error);
-	// 	}
-	// }
 </script>
 
-<!-- <form on:submit|preventDefault={filterAnimals} class="filterForm"> -->
-<form class="filterForm">
+<form on:submit|preventDefault={onFilterChange} on:reset={onFilterChange} class="filterForm">
 	<div class="selectWrapper">
 		<select class="select" name="Вид животного">
 			<option value="">Вид животного</option>
@@ -90,7 +60,7 @@
 		</select>
 	</div>
 
-	<button class="searchButton" type="submit">Поиск</button>
+	<button class="searchButton" type="button">Поиск</button>
 	<button class="resetButton" type="reset">Сбросить параметры</button>
 </form>
 

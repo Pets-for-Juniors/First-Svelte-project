@@ -6,14 +6,17 @@
 	import Filter from './Filter.svelte';
 	import ImageGallery from './ImageGallery.svelte';
 
-	// const animals = writable<Animal[]>([]);
 	const filteredAnimals = writable<Animal[]>([]);
 	const animalsPerPage = 8;
+
+	function onFilterChange() {
+		// filterAnimals();
+	}
 </script>
 
 <section class="filter">
 	<div class="filterWrapper">
-		<Filter />
+		<Filter {onFilterChange} />
 
 		<p class="text">Воспользуйтесь фильтром, чтобы найти идеального друга!</p>
 
