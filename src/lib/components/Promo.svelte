@@ -28,7 +28,6 @@
 		padding: 60px 0 75px;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 	}
 
 	.tree {
@@ -60,28 +59,25 @@
 	}
 
 	.textContainer {
+		height: fit-content;
 		width: 50%;
 		display: flex;
 		flex-direction: column;
-		margin-left: 30px;
+		margin: 225px 0 0 30px;
 		text-align: left;
-		justify-content: center;
 
-		gap: 20px;
+		gap: 45px;
 
 		z-index: 4;
 	}
 
 	.title {
 		font-family: RubikMonoOne-Regular, sans-serif;
-		font-size: 60px;
+		font-size: var(--extra-large-text);
 		letter-spacing: var(--extra-large-text-letter-spacing);
 		color: var(--amber);
 
 		text-shadow: 4px 8px 4px rgb(0, 0, 0, 0.5);
-
-		// position: absolute;
-		// top: 150px;
 	}
 
 	.text {
