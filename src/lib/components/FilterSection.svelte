@@ -1,17 +1,19 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+
 	import type { Animal } from '../../types/index';
+
 	import Filter from './Filter.svelte';
 	import ImageGallery from './ImageGallery.svelte';
 
-	const animals = writable<Animal[]>([]);
+	// const animals = writable<Animal[]>([]);
 	const filteredAnimals = writable<Animal[]>([]);
 	const animalsPerPage = 8;
 </script>
 
 <section class="filter">
 	<div class="filterWrapper">
-		<Filter animals={$animals} />
+		<Filter />
 
 		<p class="text">Воспользуйтесь фильтром, чтобы найти идеального друга!</p>
 

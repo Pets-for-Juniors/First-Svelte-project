@@ -19,7 +19,7 @@
 		try {
 			const data = await fetchAnimals(offset, animalsPerPage);
 			filteredAnimals.set(data.data || []);
-			console.log('галерея ', data.data);
+			// console.log('галерея ', data.data);
 			totalItems = data.count || 0;
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);

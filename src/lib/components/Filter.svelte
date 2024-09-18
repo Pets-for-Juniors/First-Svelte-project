@@ -1,68 +1,64 @@
 <script lang="ts">
-	import { API_BASE_URL } from '../../constants/externalLinks';
-
 	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { fetchAnimals } from '../../api/api';
-	import type { Animal } from '../../types/index';
 
-	export let animals: Animal[] = [];
-	export let filteredAnimals = writable<Animal[]>([]);
+	import { getAnimalAges, getAnimalBreeds, getAnimalGenders, getAnimalTypes } from '../../api/api';
+	import type { AnimalAge, AnimalBreed, AnimalGender, AnimalType } from '../../types/index';
 
-	let types: string[] = [];
-	let sexes: string[] = [];
-	let ages: string[] = [];
-	let breeds: string[] = [];
+	// export let animals: Animal[] = [];
+	// export let filteredAnimals = writable<Animal[]>([]);
+
+	let types: AnimalType[] = [];
+	let sexes: AnimalGender[] = [];
+	let ages: AnimalAge[] = [];
+	let breeds: AnimalBreed[] = [];
 
 	onMount(async () => {
 		try {
-			const response = await fetchAnimals();
-			animals = response.data;
-			types = [...new Set(animals.map((animal) => animal.type))];
-			sexes = [...new Set(animals.map((animal) => animal.sex))];
-			ages = [...new Set(animals.map((animal) => animal.age.toString()))];
-			breeds = [...new Set(animals.map((animal) => animal.breed))];
-			filteredAnimals.set(animals);
+			types = await getAnimalTypes();
+			sexes = await getAnimalGenders();
+			ages = await getAnimalAges();
+			breeds = await getAnimalBreeds();
 		} catch (error) {
 			console.error('Не удалось загрузить и обработать данные:', error);
 		}
 	});
 
-	async function filterAnimals(event: Event) {
-		event.preventDefault();
+	// async function filterAnimals(event: Event) {
+	// 	event.preventDefault();
 
-		const filters = {
-			type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
-			sex: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
-			age: (document.querySelector('select[name="Возраст"]') as HTMLSelectElement).value,
-			breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
-		};
+	// 	const filters = {
+	// 		type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
+	// 		sex: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
+	// 		age: (document.querySelector('select[name="Возраст"]') as HTMLSelectElement).value,
+	// 		breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
+	// 	};
 
-		let query = [];
-		if (filters.type) query.push(`type=${filters.type}`);
-		if (filters.sex) query.push(`sex=${filters.sex}`);
-		if (filters.age) query.push(`age=${filters.age}`);
-		if (filters.breed) query.push(`breed=${filters.breed}`);
+	// 	let query = [];
+	// 	if (filters.type) query.push(`type=${filters.type}`);
+	// 	if (filters.sex) query.push(`sex=${filters.sex}`);
+	// 	if (filters.age) query.push(`age=${filters.age}`);
+	// 	if (filters.breed) query.push(`breed=${filters.breed}`);
 
-		const queryString = query.length ? `?${query.join('&')}` : '';
+	// 	const queryString = query.length ? `?${query.join('&')}` : '';
 
-		try {
-			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
-			const data = await response.json();
-			filteredAnimals.set(data.data || []);
-			console.log('фильтр ', data.data);
-		} catch (error) {
-			console.error('Ошибка при загрузке данных:', error);
-		}
-	}
+	// 	try {
+	// 		const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
+	// 		const data = await response.json();
+	// 		filteredAnimals.set(data.data || []);
+	// 		console.log('фильтр ', data.data);
+	// 	} catch (error) {
+	// 		console.error('Ошибка при загрузке данных:', error);
+	// 	}
+	// }
 </script>
 
-<form on:submit|preventDefault={filterAnimals} class="filterForm">
+<!-- <form on:submit|preventDefault={filterAnimals} class="filterForm"> -->
+<form class="filterForm">
 	<div class="selectWrapper">
 		<select class="select" name="Вид животного">
 			<option value="">Вид животного</option>
-			{#each types as type}
-				<option value={type}>{type}</option>
+			{#each types as types}
+				<option value={types.type}>{types.type}</option>
 			{/each}
 		</select>
 	</div>
@@ -70,8 +66,8 @@
 	<div class="selectWrapper">
 		<select class="select" name="Пол">
 			<option value="">Пол</option>
-			{#each sexes as sex}
-				<option value={sex}>{sex}</option>
+			{#each sexes as sexes}
+				<option value={sexes.sex}>{sexes.sex}</option>
 			{/each}
 		</select>
 	</div>
@@ -79,8 +75,8 @@
 	<div class="selectWrapper">
 		<select class="select" name="Возраст">
 			<option value="">Возраст</option>
-			{#each ages as age}
-				<option value={age}>{age}</option>
+			{#each ages as ages}
+				<option value={ages.title}>{ages.title}</option>
 			{/each}
 		</select>
 	</div>
@@ -88,8 +84,8 @@
 	<div class="selectWrapper">
 		<select class="select" name="Порода">
 			<option value="">Порода</option>
-			{#each breeds as breed}
-				<option value={breed}>{breed}</option>
+			{#each breeds as breeds}
+				<option value={breeds.breed}>{breeds.breed}</option>
 			{/each}
 		</select>
 	</div>

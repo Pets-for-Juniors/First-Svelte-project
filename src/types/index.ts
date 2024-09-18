@@ -8,3 +8,22 @@ export type Animal = {
 	description: string;
 	images: string;
 };
+
+export type AnimalType = {
+	type: string;
+};
+
+export type AnimalGender = {
+	sex: string;
+};
+
+export type AnimalAge = {
+	title: string;
+	minAge: number;
+	maxAge: number;
+};
+
+export type AnimalBreed = {
+	type: string;
+	breed: string;
+};
