@@ -10,17 +10,21 @@
 	const filteredAnimals = writable<Animal[]>([]);
 	const animalsPerPage = 8;
 
-	async function onFilterChange(filters: {
-		type: string;
-		sex: string;
-		age: { min: number; max: number };
-		breed: string;
-	}) {
+	async function onFilterChange(
+		filters?: {
+			type: string;
+			sex: string;
+			age: { minAge: number; maxAge: number };
+			breed: string;
+		} | null
+	) {
 		let query = [];
-		if (filters.type) query.push(`type=${filters.type}`);
-		if (filters.sex) query.push(`sex=${filters.sex}`);
-		if (filters.age) query.push(`age=${filters.age}`);
-		if (filters.breed) query.push(`breed=${filters.breed}`);
+		if (filters) {
+			if (filters.type) query.push(`type=${filters.type}`);
+			if (filters.sex) query.push(`sex=${filters.sex}`);
+			if (filters.age) query.push(`age__gte=${filters.age.minAge}&age__lte=${filters.age.maxAge}`);
+			if (filters.breed) query.push(`breed=${filters.breed}`);
+		}
 
 		const queryString = query.length ? `?${query.join('&')}` : '';
 

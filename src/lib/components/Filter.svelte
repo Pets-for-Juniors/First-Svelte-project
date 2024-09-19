@@ -5,12 +5,14 @@
 	import type { AnimalAge, AnimalBreed, AnimalGender, AnimalType } from '../../types/index';
 	import SelectElement from './SelectElement.svelte';
 
-	export let onFilterChange: (filters: {
-		type: string;
-		sex: string;
-		age: { min: number; max: number };
-		breed: string;
-	}) => void = () => {};
+	export let onFilterChange: (
+		filters?: {
+			type: string;
+			sex: string;
+			age: { minAge: number; maxAge: number };
+			breed: string;
+		} | null
+	) => void = () => {};
 
 	let types: AnimalType[] = [];
 	let sexes: AnimalGender[] = [];
@@ -18,13 +20,18 @@
 	let breeds: AnimalBreed[] = [];
 
 	const onSearchClick = () => {
+		const form = document.querySelector('form[name="filterForm"]') as HTMLFormElement;
+		const formData = new FormData(form);
+
 		const filters = {
-			type: (document.querySelector('select[name="Вид животного"]') as HTMLSelectElement).value,
-			sex: (document.querySelector('select[name="Пол"]') as HTMLSelectElement).value,
-			age: (document.querySelector('select[name="Возраст"]') as HTMLSelectElement).value,
-			breed: (document.querySelector('select[name="Порода"]') as HTMLSelectElement).value
+			type:
+				formData.get('Вид животного') && JSON.parse(formData.get('Вид животного') as string).type,
+			sex: formData.get('Пол') && JSON.parse(formData.get('Пол') as string).sex,
+			age: formData.get('Возраст') && JSON.parse(formData.get('Возраст') as string),
+			breed: formData.get('Порода') && JSON.parse(formData.get('Порода') as string).breed
 		};
 
+		console.log('filters', filters);
 		onFilterChange(filters);
 	};
 
@@ -40,14 +47,16 @@
 	});
 </script>
 
-<form class="filterForm">
+<form class="filterForm" name="filterForm">
 	<SelectElement name="Вид животного" options={types} nameField="type" />
 	<SelectElement name="Пол" options={sexes} nameField="sex" />
 	<SelectElement name="Возраст" options={ages} nameField="title" />
 	<SelectElement name="Порода" options={breeds} nameField="breed" />
 
 	<button class="searchButton" type="button" on:click={onSearchClick}>Поиск</button>
-	<button class="resetButton" type="reset" on:click={onFilterChange}>Сбросить параметры</button>
+	<button class="resetButton" type="reset" on:click={() => onFilterChange()}
+		>Сбросить параметры</button
+	>
 </form>
 
 <style lang="scss">

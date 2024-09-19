@@ -8,7 +8,7 @@
 	<select class="select" {name}>
 		<option value="">{name}</option>
 		{#each options as option}
-			<option value={option}>{option[nameField]}</option>
+			<option value={JSON.stringify(option)}>{option[nameField]}</option>
 		{/each}
 	</select>
 </div>
