@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
+	import { API_BASE_URL } from '../../constants/externalLinks';
 
 	import type { Animal } from '../../types/index';
 
@@ -9,8 +10,28 @@
 	const filteredAnimals = writable<Animal[]>([]);
 	const animalsPerPage = 8;
 
-	function onFilterChange() {
-		// filterAnimals();
+	async function onFilterChange(filters: {
+		type: string;
+		sex: string;
+		age: { min: number; max: number };
+		breed: string;
+	}) {
+		let query = [];
+		if (filters.type) query.push(`type=${filters.type}`);
+		if (filters.sex) query.push(`sex=${filters.sex}`);
+		if (filters.age) query.push(`age=${filters.age}`);
+		if (filters.breed) query.push(`breed=${filters.breed}`);
+
+		const queryString = query.length ? `?${query.join('&')}` : '';
+
+		try {
+			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
+			const data = await response.json();
+			filteredAnimals.set(data.data || []);
+			console.log('фильтр ', data.data);
+		} catch (error) {
+			console.error('Ошибка при загрузке данных:', error);
+		}
 	}
 </script>
 
