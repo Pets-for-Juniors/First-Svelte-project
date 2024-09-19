@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { fetchAnimals } from '../../api/api';
-	import { API_BASE_URL } from '../../constants/externalLinks';
 	import type { Animal } from '../../types/index';
 
 	export let animalsPerPage: number = 8;
@@ -46,7 +45,7 @@
 
 	{#if $filteredAnimals && $filteredAnimals.length > 0}
 		{#each $filteredAnimals as animal (animal.id)}
-			<img src={`${API_BASE_URL}${animal.images}`} alt={animal.type} class="image" />
+			<img src={animal.images} alt={animal.type} class="image" />
 		{/each}
 	{:else}
 		<p>Загрузка...</p>
