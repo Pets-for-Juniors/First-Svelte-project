@@ -17,8 +17,8 @@
 	async function loadFilteredAnimals(offset: number) {
 		try {
 			const data = await fetchAnimals(offset, animalsPerPage);
-			filteredAnimals.set(data.data || []);
-			// console.log('галерея ', data.data);
+			filteredAnimals.set(data.results || []);
+			// console.log('галерея ', data.results);
 			totalItems = data.count || 0;
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);

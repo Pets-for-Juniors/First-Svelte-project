@@ -1,23 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import type { AnimalFilter } from '../../types/index';
+	import DropdownAge from './DropdownAge.svelte';
+	import DropdownBreed from './DropdownBreed.svelte';
+	import DropdownSex from './DropdownSex.svelte';
+	import DropdownType from './DropdownType.svelte';
 
-	import { getAnimalAges, getAnimalBreeds, getAnimalGenders, getAnimalTypes } from '../../api/api';
-	import type { AnimalAge, AnimalBreed, AnimalGender, AnimalType } from '../../types/index';
-	import SelectElement from './SelectElement.svelte';
+	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
 
-	export let onFilterChange: (
-		filters?: {
-			type: string;
-			sex: string;
-			age: { minAge: number; maxAge: number };
-			breed: string;
-		} | null
-	) => void = () => {};
-
-	let types: AnimalType[] = [];
-	let sexes: AnimalGender[] = [];
-	let ages: AnimalAge[] = [];
-	let breeds: AnimalBreed[] = [];
+	// let modelFilter: AnimalFilter;
 
 	const onSearchClick = () => {
 		const form = document.querySelector('form[name="filterForm"]') as HTMLFormElement;
@@ -34,24 +24,13 @@
 		console.log('filters', filters);
 		onFilterChange(filters);
 	};
-
-	onMount(async () => {
-		try {
-			types = await getAnimalTypes();
-			sexes = await getAnimalGenders();
-			ages = await getAnimalAges();
-			breeds = await getAnimalBreeds();
-		} catch (error) {
-			console.error('Не удалось загрузить и обработать данные:', error);
-		}
-	});
 </script>
 
 <form class="filterForm" name="filterForm">
-	<SelectElement name="Вид животного" options={types} nameField="type" />
-	<SelectElement name="Пол" options={sexes} nameField="sex" />
-	<SelectElement name="Возраст" options={ages} nameField="title" />
-	<SelectElement name="Порода" options={breeds} nameField="breed" />
+	<DropdownType />
+	<DropdownSex />
+	<DropdownAge />
+	<DropdownBreed />
 
 	<button class="searchButton" type="button" on:click={onSearchClick}>Поиск</button>
 	<button class="resetButton" type="reset" on:click={() => onFilterChange()}

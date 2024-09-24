@@ -2,7 +2,7 @@
 	import { writable } from 'svelte/store';
 	import { API_BASE_URL } from '../../constants/externalLinks';
 
-	import type { Animal } from '../../types/index';
+	import type { Animal, AnimalFilter } from '../../types/index';
 
 	import Filter from './Filter.svelte';
 	import ImageGallery from './ImageGallery.svelte';
@@ -10,14 +10,7 @@
 	const filteredAnimals = writable<Animal[]>([]);
 	const animalsPerPage = 8;
 
-	async function onFilterChange(
-		filters?: {
-			type: string;
-			sex: string;
-			age: { minAge: number; maxAge: number };
-			breed: string;
-		} | null
-	) {
+	async function onFilterChange(filters?: AnimalFilter | null) {
 		let query = [];
 		if (filters) {
 			if (filters.type) query.push(`type=${filters.type}`);
@@ -31,8 +24,8 @@
 		try {
 			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
 			const data = await response.json();
-			filteredAnimals.set(data.data || []);
-			console.log('фильтр ', data.data);
+			filteredAnimals.set(data.results || []);
+			console.log('фильтр ', data.results);
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
 		}

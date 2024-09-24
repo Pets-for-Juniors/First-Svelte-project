@@ -9,6 +9,13 @@ export type Animal = {
 	images: string;
 };
 
+export type AnimalFilter = {
+	type?: AnimalType;
+	sex?: AnimalGender;
+	age?: AnimalAge;
+	breed?: AnimalBreed;
+};
+
 export type AnimalType = {
 	type: string;
 };

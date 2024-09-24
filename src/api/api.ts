@@ -21,8 +21,8 @@ export const getAnimalTypes = async () => {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
 		const data = await response.json();
-		// console.log('типы', data.data);
-		return data.data;
+		// console.log('типы', data.results);
+		return data.results;
 	} catch (error) {
 		console.error('Ошибка при загрузке типов животных:', error);
 		throw error;
@@ -36,7 +36,7 @@ export const getAnimalGenders = async () => {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
 		const data = await response.json();
-		return data.data;
+		return data.results;
 	} catch (error) {
 		console.error('Ошибка при загрузке пола животных:', error);
 		throw error;
@@ -50,7 +50,7 @@ export const getAnimalBreeds = async () => {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
 		const data = await response.json();
-		return data.data;
+		return data.results;
 	} catch (error) {
 		console.error('Ошибка при загрузке пород животных:', error);
 		throw error;
@@ -64,7 +64,7 @@ export const getAnimalAges = async () => {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
 		const data = await response.json();
-		return data.data;
+		return data.results;
 	} catch (error) {
 		console.error('Ошибка при загрузке возраста животных:', error);
 		throw error;
