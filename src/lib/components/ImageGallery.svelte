@@ -97,6 +97,10 @@
 		border: none;
 
 		cursor: pointer;
+
+		&:disabled {
+			visibility: hidden;
+		}
 	}
 
 	.prevButton {
