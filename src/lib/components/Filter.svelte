@@ -7,7 +7,7 @@
 
 	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
 
-	// let modelFilter: AnimalFilter;
+	let modelFilter: AnimalFilter;
 
 	const onSearchClick = () => {
 		const form = document.querySelector('form[name="filterForm"]') as HTMLFormElement;
@@ -27,10 +27,14 @@
 </script>
 
 <form class="filterForm" name="filterForm">
-	<DropdownType />
-	<DropdownSex />
-	<DropdownAge />
-	<DropdownBreed />
+	<DropdownType selected={modelFilter?.type?.type} {onFilterChange} />
+	<DropdownSex selected={modelFilter?.sex?.sex} {onFilterChange} />
+	<DropdownAge selected={modelFilter?.age?.title} {onFilterChange} />
+	<DropdownBreed
+		selected={modelFilter?.breed?.breed}
+		{onFilterChange}
+		type={modelFilter?.type?.type}
+	/>
 
 	<button class="searchButton" type="button" on:click={onSearchClick}>Поиск</button>
 	<button class="resetButton" type="reset" on:click={() => onFilterChange()}

@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { getAnimalBreeds } from '../../api/api';
-	// import type { AnimalFilter, AnimalBreed } from '../../types/index';
-	import type { AnimalBreed } from '../../types/index';
+	import type { AnimalBreed, AnimalFilter } from '../../types/index';
 
 	import SelectElement from './SelectElement.svelte';
 
-	// export let selected: AnimalBreed | null = null;
-	// export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
+	export let selected: string | null = null;
+	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
+	export let type: string | undefined;
 
 	let breeds: AnimalBreed[] = [];
 
@@ -20,6 +20,4 @@
 	});
 </script>
 
-<SelectElement name="Порода" options={breeds} nameField="breed" />
-
-<style lang="scss"></style>
+<SelectElement name="Порода" options={breeds} nameField="breed" {selected} {onFilterChange} />

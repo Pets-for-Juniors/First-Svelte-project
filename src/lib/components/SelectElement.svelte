@@ -2,6 +2,8 @@
 	export let name: string;
 	export let options: any[] = [];
 	export let nameField: string;
+	export let selected: string | null = null;
+	export let onFilterChange: (filters?: any | null) => void = () => {};
 </script>
 
 <div class="selectWrapper">
