@@ -1,5 +1,12 @@
 <script lang="ts">
-	import type { AnimalFilter } from '../../types/index';
+	import { onMount } from 'svelte';
+	import type {
+		AnimalAge,
+		AnimalBreed,
+		AnimalFilter,
+		AnimalGender,
+		AnimalType
+	} from '../../types/index';
 	import DropdownAge from './DropdownAge.svelte';
 	import DropdownBreed from './DropdownBreed.svelte';
 	import DropdownSex from './DropdownSex.svelte';
@@ -8,6 +15,22 @@
 	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
 
 	let modelFilter: AnimalFilter;
+
+	const onChange = (
+		fieldName: string,
+		value: AnimalType | AnimalBreed | AnimalGender | AnimalAge | undefined
+	) => {
+		(modelFilter as any)[fieldName] = value;
+	};
+
+	onMount(async () => {
+		modelFilter = {
+			type: undefined,
+			sex: undefined,
+			age: undefined,
+			breed: undefined
+		};
+	});
 
 	const onSearchClick = () => {
 		const form = document.querySelector('form[name="filterForm"]') as HTMLFormElement;
@@ -21,20 +44,15 @@
 			breed: formData.get('Порода') && JSON.parse(formData.get('Порода') as string).breed
 		};
 
-		console.log('filters', filters);
 		onFilterChange(filters);
 	};
 </script>
 
 <form class="filterForm" name="filterForm">
-	<DropdownType selected={modelFilter?.type?.type} {onFilterChange} />
-	<DropdownSex selected={modelFilter?.sex?.sex} {onFilterChange} />
-	<DropdownAge selected={modelFilter?.age?.title} {onFilterChange} />
-	<DropdownBreed
-		selected={modelFilter?.breed?.breed}
-		{onFilterChange}
-		type={modelFilter?.type?.type}
-	/>
+	<DropdownType selected={modelFilter?.type} {onChange} />
+	<DropdownSex selected={modelFilter?.sex} {onChange} />
+	<DropdownAge selected={modelFilter?.age} {onChange} />
+	<DropdownBreed selected={modelFilter?.breed} type={modelFilter?.type} {onChange} />
 
 	<button class="searchButton" type="button" on:click={onSearchClick}>Поиск</button>
 	<button class="resetButton" type="reset" on:click={() => onFilterChange()}

@@ -1,23 +1,43 @@
 <script lang="ts">
+	import { getAnimalBreeds } from '$api/api';
 	import { onMount } from 'svelte';
-	import { getAnimalBreeds } from '../../api/api';
-	import type { AnimalBreed, AnimalFilter } from '../../types/index';
+	import type { AnimalBreed, AnimalType } from '../../types/index';
 
 	import SelectElement from './SelectElement.svelte';
 
-	export let selected: string | null = null;
-	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
-	export let type: string | undefined;
+	export let selected: AnimalBreed | undefined;
+	export let onChange: (fieldName: string, value: AnimalBreed | undefined) => void = () => {};
+	export let type: AnimalType | undefined;
 
 	let breeds: AnimalBreed[] = [];
+	let currentType: AnimalType | undefined;
 
 	onMount(async () => {
+		await loadData(true);
+	});
+
+	const loadData = async (firstLoad: boolean) => {
 		try {
-			breeds = await getAnimalBreeds();
+			if (firstLoad || type?.type !== currentType?.type) {
+				breeds = await getAnimalBreeds(type?.type);
+				if (selected) {
+					onChange('breed', undefined);
+				}
+
+				currentType = type;
+			}
 		} catch (error) {
 			console.error('Не удалось загрузить породы животных:', error);
 		}
-	});
+	};
+
+	$: type, loadData(false);
 </script>
 
-<SelectElement name="Порода" options={breeds} nameField="breed" {selected} {onFilterChange} />
+<SelectElement
+	name="Порода"
+	options={breeds}
+	nameField="breed"
+	selected={JSON.stringify(selected)}
+	onChange={(e) => onChange('breed', e ? JSON.parse(e) : undefined)}
+/>

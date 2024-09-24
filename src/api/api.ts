@@ -16,12 +16,11 @@ export const fetchAnimals = async (offset = 0, limit = 8) => {
 
 export const getAnimalTypes = async () => {
 	try {
-		const response = await fetch(`${API_BASE_URL}/api/pets/filter/type/`);
+		const response = await fetch(`${API_BASE_URL}/api/pets/filter/type/?limit=1000`);
 		if (!response.ok) {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
 		const data = await response.json();
-		// console.log('типы', data.results);
 		return data.results;
 	} catch (error) {
 		console.error('Ошибка при загрузке типов животных:', error);
@@ -31,7 +30,7 @@ export const getAnimalTypes = async () => {
 
 export const getAnimalGenders = async () => {
 	try {
-		const response = await fetch(`${API_BASE_URL}/api/pets/filter/gender/`);
+		const response = await fetch(`${API_BASE_URL}/api/pets/filter/gender/?limit=1000`);
 		if (!response.ok) {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
@@ -43,9 +42,11 @@ export const getAnimalGenders = async () => {
 	}
 };
 
-export const getAnimalBreeds = async () => {
+export const getAnimalBreeds = async (type?: string) => {
 	try {
-		const response = await fetch(`${API_BASE_URL}/api/pets/filter/breed/`);
+		const url = `${API_BASE_URL}/api/pets/filter/breed/?limit=1000${type ? `&type=${type}` : ''}`;
+
+		const response = await fetch(url);
 		if (!response.ok) {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}
@@ -59,7 +60,7 @@ export const getAnimalBreeds = async () => {
 
 export const getAnimalAges = async () => {
 	try {
-		const response = await fetch(`${API_BASE_URL}/api/pets/filter/age/`);
+		const response = await fetch(`${API_BASE_URL}/api/pets/filter/age/?limit=1000`);
 		if (!response.ok) {
 			throw new Error(`Ошибка HTTP: ${response.status}`);
 		}

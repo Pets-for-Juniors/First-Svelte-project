@@ -25,7 +25,6 @@
 			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
 			const data = await response.json();
 			filteredAnimals.set(data.results || []);
-			console.log('фильтр ', data.results);
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
 		}

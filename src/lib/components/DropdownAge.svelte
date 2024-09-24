@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { getAnimalAges } from '$api/api';
 	import { onMount } from 'svelte';
-	import { getAnimalAges } from '../../api/api';
-	import type { AnimalAge, AnimalFilter } from '../../types/index';
+	import type { AnimalAge } from '../../types/index';
 
 	import SelectElement from './SelectElement.svelte';
 
-	export let selected: string | null = null;
-	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
+	export let selected: AnimalAge | undefined;
+	export let onChange: (fieldName: string, value: AnimalAge | undefined) => void = () => {};
 
 	let ages: AnimalAge[] = [];
 
@@ -19,4 +19,10 @@
 	});
 </script>
 
-<SelectElement name="Возраст" options={ages} nameField="title" {selected} {onFilterChange} />
+<SelectElement
+	name="Возраст"
+	options={ages}
+	nameField="title"
+	selected={JSON.stringify(selected)}
+	onChange={(e) => onChange('age', e ? JSON.parse(e) : undefined)}
+/>

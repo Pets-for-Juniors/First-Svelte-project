@@ -1,12 +1,12 @@
 <script lang="ts">
+	import { getAnimalGenders } from '$api/api';
 	import { onMount } from 'svelte';
-	import { getAnimalGenders } from '../../api/api';
-	import type { AnimalFilter, AnimalGender } from '../../types/index';
+	import type { AnimalGender } from '../../types/index';
 
 	import SelectElement from './SelectElement.svelte';
 
-	export let selected: string | null = null;
-	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
+	export let selected: AnimalGender | undefined;
+	export let onChange: (fieldName: string, value: AnimalGender | undefined) => void = () => {};
 
 	let sexes: AnimalGender[] = [];
 
@@ -19,4 +19,10 @@
 	});
 </script>
 
-<SelectElement name="Пол" options={sexes} nameField="sex" {selected} {onFilterChange} />
+<SelectElement
+	name="Пол"
+	options={sexes}
+	nameField="sex"
+	selected={JSON.stringify(selected)}
+	onChange={(e) => onChange('sex', e ? JSON.parse(e) : undefined)}
+/>

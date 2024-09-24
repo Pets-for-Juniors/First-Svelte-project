@@ -2,13 +2,13 @@
 	export let name: string;
 	export let options: any[] = [];
 	export let nameField: string;
-	export let selected: string | null = null;
-	export let onFilterChange: (filters?: any | null) => void = () => {};
+	export let selected: string | undefined;
+	export let onChange: (value: string | undefined) => void = () => {};
 </script>
 
 <div class="selectWrapper">
-	<select class="select" {name}>
-		<option value="">{name}</option>
+	<select class="select" {name} bind:value={selected} on:change={() => onChange(selected)}>
+		<option value={undefined}>{name}</option>
 		{#each options as option}
 			<option value={JSON.stringify(option)}>{option[nameField]}</option>
 		{/each}

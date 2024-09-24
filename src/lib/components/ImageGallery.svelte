@@ -1,7 +1,7 @@
 <script lang="ts">
+	import { fetchAnimals } from '$api/api';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { fetchAnimals } from '../../api/api';
 	import type { Animal } from '../../types/index';
 
 	export let animalsPerPage: number = 8;
@@ -18,7 +18,6 @@
 		try {
 			const data = await fetchAnimals(offset, animalsPerPage);
 			filteredAnimals.set(data.results || []);
-			// console.log('галерея ', data.results);
 			totalItems = data.count || 0;
 		} catch (error) {
 			console.error('Ошибка при загрузке данных:', error);
