@@ -12,7 +12,7 @@
 	import DropdownSex from './DropdownSex.svelte';
 	import DropdownType from './DropdownType.svelte';
 
-	export let onFilterChange: (filters?: AnimalFilter | null) => void = () => {};
+	export let onFilterChange: (filters?: AnimalFilter | undefined) => void = () => {};
 
 	let modelFilter: AnimalFilter;
 

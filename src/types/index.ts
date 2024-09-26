@@ -1,3 +1,10 @@
+export type DataSource<T> = {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: T[];
+};
+
 export type Animal = {
 	id: number;
 	type: string;

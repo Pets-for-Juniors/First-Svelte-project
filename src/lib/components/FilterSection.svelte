@@ -1,34 +1,40 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import { API_BASE_URL } from '../../constants/externalLinks';
+	import type { AnimalFilter } from '../../types/index';
 
-	import type { Animal, AnimalFilter } from '../../types/index';
-
+	import { AnimalDataSource } from '$lib/dataSources/AnimalDataSource';
+	import { onMount } from 'svelte';
 	import Filter from './Filter.svelte';
 	import ImageGallery from './ImageGallery.svelte';
 
-	const filteredAnimals = writable<Animal[]>([]);
-	const animalsPerPage = 8;
+	let animalsDataSource: AnimalDataSource;
 
-	async function onFilterChange(filters?: AnimalFilter | null) {
-		let query = [];
-		if (filters) {
-			if (filters.type) query.push(`type=${filters.type}`);
-			if (filters.sex) query.push(`sex=${filters.sex}`);
-			if (filters.age) query.push(`age__gte=${filters.age.minAge}&age__lte=${filters.age.maxAge}`);
-			if (filters.breed) query.push(`breed=${filters.breed}`);
-		}
+	onMount(async () => {
+		const ds = new AnimalDataSource();
+		await ds.load();
+		animalsDataSource = ds;
+	});
 
-		const queryString = query.length ? `?${query.join('&')}` : '';
-
-		try {
-			const response = await fetch(`${API_BASE_URL}/api/pets/${queryString}`);
-			const data = await response.json();
-			filteredAnimals.set(data.results || []);
-		} catch (error) {
-			console.error('Ошибка при загрузке данных:', error);
-		}
+	async function onFilterChange(filters?: AnimalFilter | undefined) {
+		const ds = new AnimalDataSource(filters);
+		await ds.load();
+		animalsDataSource = ds;
 	}
+
+	async function onPrevPage() {
+		await animalsDataSource.loadPrev();
+	}
+
+	async function onNextPage() {
+		await animalsDataSource.loadNext();
+	}
+
+	// async function onPrevPage() {
+	// 	animalsDataSource = await animalsDataSource.loadPrev();
+	// }
+
+	// async function onNextPage() {
+	// 	animalsDataSource = await animalsDataSource.loadNext();
+	// }
 </script>
 
 <section class="filter">
@@ -37,8 +43,7 @@
 
 		<p class="text">Воспользуйтесь фильтром, чтобы найти идеального друга!</p>
 
-		<ImageGallery {animalsPerPage} {filteredAnimals} />
-		<!-- <ImageGallery {filteredAnimals} {onClick} /> -->
+		<ImageGallery dataSource={animalsDataSource} {onPrevPage} {onNextPage} />
 	</div>
 </section>
 

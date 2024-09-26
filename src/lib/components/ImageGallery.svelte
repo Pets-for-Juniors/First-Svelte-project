@@ -1,60 +1,23 @@
 <script lang="ts">
-	import { fetchAnimals } from '$api/api';
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
-	import type { Animal } from '../../types/index';
+	import { AnimalDataSource } from '$lib/dataSources/AnimalDataSource';
 
-	export let animalsPerPage: number = 8;
-	export let filteredAnimals = writable<Animal[]>([]);
-	export let currentOffset = writable(0);
-
-	let totalItems = 0;
-
-	onMount(async () => {
-		await loadFilteredAnimals($currentOffset);
-	});
-
-	async function loadFilteredAnimals(offset: number) {
-		try {
-			const data = await fetchAnimals(offset, animalsPerPage);
-			filteredAnimals.set(data.results || []);
-			totalItems = data.count || 0;
-		} catch (error) {
-			console.error('Ошибка при загрузке данных:', error);
-		}
-	}
-
-	function prevPage() {
-		if ($currentOffset > 0) {
-			currentOffset.update((n) => n - animalsPerPage);
-			loadFilteredAnimals($currentOffset);
-		}
-	}
-
-	function nextPage() {
-		if ($currentOffset + animalsPerPage < totalItems) {
-			currentOffset.update((n) => n + animalsPerPage);
-			loadFilteredAnimals($currentOffset);
-		}
-	}
+	export let dataSource: AnimalDataSource;
+	export let onPrevPage: () => void;
+	export let onNextPage: () => void;
 </script>
 
 <div class="imagesContainer">
-	<button class="prevButton" on:click={prevPage} disabled={$currentOffset === 0}></button>
+	<button class="prevButton" on:click={onPrevPage} disabled={!dataSource?.canPrev}></button>
 
-	{#if $filteredAnimals && $filteredAnimals.length > 0}
-		{#each $filteredAnimals as animal (animal.id)}
+	{#if dataSource?.loaded}
+		{#each dataSource.results as animal (animal.id)}
 			<img src={animal.images} alt={animal.type} class="image" />
 		{/each}
 	{:else}
 		<p>Загрузка...</p>
 	{/if}
 
-	<button
-		class="nextButton"
-		on:click={nextPage}
-		disabled={$currentOffset + animalsPerPage >= totalItems}
-	></button>
+	<button class="nextButton" on:click={onNextPage} disabled={!dataSource?.canNext}></button>
 </div>
 
 <style lang="scss">
