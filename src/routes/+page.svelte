@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FilterSection from '$lib/components/FilterSection.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import InfoSection from '$lib/components/InfoSection.svelte';
 	import Main from '$lib/components/Main.svelte';
@@ -9,6 +10,7 @@
 
 <Main>
 	<Promo />
+	<FilterSection />
 	<InfoSection />
 </Main>
 

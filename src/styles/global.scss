@@ -16,6 +16,12 @@
 	--large-text: 32px;
 	--extra-large-text: 48px;
 
+	/* Font letter-spacing */
+	--small-text-letter-spacing: calc(var(--small-text) * 0.08);
+	--medium-text-letter-spacing: calc(var(--medium-text) * 0.08);
+	--large-text-letter-spacing: calc(var(--large-text) * 0.08);
+	--extra-large-text-letter-spacing: calc(var(--extra-large-text) * 0.08);
+
 	/* Elements */
 	--section-max-width: calc(1920px - (188px * 2));
 	--border-radius-button: 15px;

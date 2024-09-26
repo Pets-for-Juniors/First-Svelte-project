@@ -35,7 +35,7 @@
 		width: 61%;
 		font-family: RubikMonoOne-Regular, sans-serif;
 		font-size: var(--extra-large-text);
-		letter-spacing: calc(var(--extra-large-text) * 0.08);
+		letter-spacing: var(--extra-large-text-letter-spacing);
 		text-align: left;
 		color: var(--amber);
 
