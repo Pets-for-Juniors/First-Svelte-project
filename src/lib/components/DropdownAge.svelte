@@ -17,12 +17,20 @@
 			console.error('Не удалось загрузить возраст животных:', error);
 		}
 	});
+
+	const getSelectedAsString = () => {
+		return selected ? JSON.stringify(selected) : undefined;
+	};
+
+	const onSelectedChanged = (e: string | undefined) => {
+		onChange('age', e ? JSON.parse(e) : undefined);
+	};
 </script>
 
 <SelectElement
 	name="Возраст"
 	options={ages}
 	nameField="title"
-	selected={JSON.stringify(selected)}
-	onChange={(e) => onChange('age', e ? JSON.parse(e) : undefined)}
+	selected={getSelectedAsString()}
+	onChange={onSelectedChanged}
 />

@@ -17,12 +17,20 @@
 			console.error('Не удалось загрузить типы животных:', error);
 		}
 	});
+
+	const getSelectedAsString = () => {
+		return selected ? JSON.stringify(selected) : undefined;
+	};
+
+	const onSelectedChanged = (e: string | undefined) => {
+		onChange('type', e ? JSON.parse(e) : undefined);
+	};
 </script>
 
 <SelectElement
 	name="Вид животного"
 	options={types}
 	nameField="type"
-	selected={JSON.stringify(selected)}
-	onChange={(e) => onChange('type', e ? JSON.parse(e) : undefined)}
+	selected={getSelectedAsString()}
+	onChange={onSelectedChanged}
 />

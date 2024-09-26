@@ -31,6 +31,14 @@
 		}
 	};
 
+	const getSelectedAsString = () => {
+		return selected ? JSON.stringify(selected) : undefined;
+	};
+
+	const onSelectedChanged = (e: string | undefined) => {
+		onChange('breed', e ? JSON.parse(e) : undefined);
+	};
+
 	$: type, loadData(false);
 </script>
 
@@ -38,6 +46,6 @@
 	name="Порода"
 	options={breeds}
 	nameField="breed"
-	selected={JSON.stringify(selected)}
-	onChange={(e) => onChange('breed', e ? JSON.parse(e) : undefined)}
+	selected={getSelectedAsString()}
+	onChange={onSelectedChanged}
 />

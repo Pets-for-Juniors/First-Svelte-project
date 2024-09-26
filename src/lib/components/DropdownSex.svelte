@@ -17,12 +17,20 @@
 			console.error('Не удалось загрузить пол животных:', error);
 		}
 	});
+
+	const getSelectedAsString = () => {
+		return selected ? JSON.stringify(selected) : undefined;
+	};
+
+	const onSelectedChanged = (e: string | undefined) => {
+		onChange('sex', e ? JSON.parse(e) : undefined);
+	};
 </script>
 
 <SelectElement
 	name="Пол"
 	options={sexes}
 	nameField="sex"
-	selected={JSON.stringify(selected)}
-	onChange={(e) => onChange('sex', e ? JSON.parse(e) : undefined)}
+	selected={getSelectedAsString()}
+	onChange={onSelectedChanged}
 />
