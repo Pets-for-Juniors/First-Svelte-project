@@ -18,7 +18,6 @@ export class BaseDataSource<T> {
 	public canNext: boolean = false;
 
 	private async loadData(url: string, hasQuery: boolean) {
-		url = url.replace('http://', 'https://');
 		this.loaded = false;
 		try {
 			let queryString: string = '';
