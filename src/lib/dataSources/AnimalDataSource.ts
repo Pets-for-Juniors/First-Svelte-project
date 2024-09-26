@@ -15,5 +15,5 @@ export class AnimalDataSource extends BaseDataSource<Animal> {
 		const filterString = query.length ? `${query.join('&')}` : '';
 
 		super(`${API_BASE_URL}/api/pets/`, filterString, 8);
-  }
+	}
 }

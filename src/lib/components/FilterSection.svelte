@@ -16,25 +16,16 @@
 
 	async function onFilterChange(filters?: AnimalFilter | undefined) {
 		const ds = new AnimalDataSource(filters);
-		await ds.load();
-		animalsDataSource = ds;
+		animalsDataSource = await ds.load();
 	}
 
 	async function onPrevPage() {
-		await animalsDataSource.loadPrev();
+		animalsDataSource = await animalsDataSource.loadPrev();
 	}
 
 	async function onNextPage() {
-		await animalsDataSource.loadNext();
+		animalsDataSource = await animalsDataSource.loadNext();
 	}
-
-	// async function onPrevPage() {
-	// 	animalsDataSource = await animalsDataSource.loadPrev();
-	// }
-
-	// async function onNextPage() {
-	// 	animalsDataSource = await animalsDataSource.loadNext();
-	// }
 </script>
 
 <section class="filter">
