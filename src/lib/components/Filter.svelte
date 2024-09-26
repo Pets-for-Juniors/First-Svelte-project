@@ -33,18 +33,7 @@
 	});
 
 	const onSearchClick = () => {
-		const form = document.querySelector('form[name="filterForm"]') as HTMLFormElement;
-		const formData = new FormData(form);
-
-		const filters = {
-			type:
-				formData.get('Вид животного') && JSON.parse(formData.get('Вид животного') as string).type,
-			sex: formData.get('Пол') && JSON.parse(formData.get('Пол') as string).sex,
-			age: formData.get('Возраст') && JSON.parse(formData.get('Возраст') as string),
-			breed: formData.get('Порода') && JSON.parse(formData.get('Порода') as string).breed
-		};
-
-		onFilterChange(filters);
+		onFilterChange(modelFilter);
 	};
 </script>
 
