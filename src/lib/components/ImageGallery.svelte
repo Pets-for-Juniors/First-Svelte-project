@@ -22,6 +22,9 @@
 	<button class="prevButton" on:click={onPrev} disabled={!dataSource?.canPrev || !loaded}></button>
 
 	{#if loaded}
+		{#if dataSource.results.length === 0}
+			<p class="text">Ничего не найдено</p>
+		{/if}
 		{#each dataSource.results as animal (animal.id)}
 			<img src={animal.images} alt={animal.type} class="image" />
 		{/each}
@@ -92,9 +95,9 @@
 	}
 
 	.text {
-		font-family: RubikMonoOne-Regular, sans-serif;
-		font-size: var(--small-text);
-		letter-spacing: var(--small-text-letter-spacing);
+		font-family: Inter-Regular, sans-serif;
+		font-size: var(--large-text);
+		letter-spacing: var(--large-text-letter-spacing);
 		color: var(--white);
 	}
 </style>
