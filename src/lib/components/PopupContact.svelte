@@ -1,10 +1,30 @@
 <script lang="ts">
+	import { imask } from '@imask/svelte';
 	import { scale } from 'svelte/transition';
+
 	import Overlay from './Overlay.svelte';
 	import MainButton from './_ui/MainButton.svelte';
 
 	export let isPopupContactOpen: boolean;
 	export let onClose: () => void;
+
+	const options = {
+		mask: '{8}000000',
+		lazy: false
+	};
+
+	let value = '';
+
+	function accept($event: CustomEvent<{ value: string }>) {
+		const maskRef = $event.detail;
+		console.log('accept', maskRef.value);
+		value = maskRef.value;
+	}
+
+	function complete(event: CustomEvent<{ unmaskedValue: string }>) {
+		const maskRef = event.detail;
+		console.log('complete', maskRef.unmaskedValue);
+	}
 </script>
 
 {#if isPopupContactOpen}
@@ -12,7 +32,7 @@
 		<div class="popup" transition:scale={{ duration: 300 }} on:click|stopPropagation>
 			<form class="form">
 				<p class="text">Пожалуйста, представьтесь!</p>
-				<input class="input" type="text" placeholder="ФИО: " />
+				<input {value} use:imask={options} on:accept={accept} on:complete={complete} />
 
 				<div class="wrapper">
 					<p class="text">Оставьте ваши контакты для обратной связи*</p>
