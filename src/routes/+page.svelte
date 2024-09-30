@@ -11,9 +11,9 @@
 
 <Main>
 	<Promo />
-	<ContactUsSection />
 	<FilterSection />
 	<InfoSection />
+	<ContactUsSection />
 </Main>
 
 <style lang="scss"></style>

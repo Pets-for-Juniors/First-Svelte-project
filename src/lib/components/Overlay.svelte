@@ -20,7 +20,7 @@
 
 <div
 	class="overlay"
-	on:click={(e) => {
+	on:mousedown={(e) => {
 		if (e.currentTarget === e.target) {
 			onClose();
 		}
