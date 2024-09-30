@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ContactUsSection from '$lib/components/ContactUsSection.svelte';
+	import FilterSection from '$lib/components/FilterSection.svelte';
 	import Header from '$lib/components/Header.svelte';
 	import InfoSection from '$lib/components/InfoSection.svelte';
 	import Main from '$lib/components/Main.svelte';
@@ -11,6 +12,7 @@
 <Main>
 	<Promo />
 	<ContactUsSection />
+	<FilterSection />
 	<InfoSection />
 </Main>
 

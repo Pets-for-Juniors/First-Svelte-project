@@ -35,7 +35,7 @@
 	.anchor {
 		font-family: Inter-Bold, sans-serif;
 		font-size: var(--small-text);
-		letter-spacing: calc(var(--small-text) * 0.08);
+		letter-spacing: var(--small-text-letter-spacing);
 		color: var(--dark-blue);
 		text-decoration: none;
 
