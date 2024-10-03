@@ -12,10 +12,15 @@ declare global {
 
 declare module 'svelte/elements' {
 	export interface HTMLInputAttributes {
-		// Svelte 4
-		'on:accept'?: FormEventHandler<HTMLInputElement> | undefined | null;
-		// Svelte 5
-		onaccept?: FormEventHandler<T> | undefined | null;
+		'on:accept'?: Function;
+
+		'on:complete'?: Function;
+	}
+
+	export interface HTMLTextareaAttributes {
+		'on:accept'?: Function;
+
+		'on:complete'?: Function;
 	}
 }
 

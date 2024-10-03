@@ -1,28 +1,60 @@
 <script lang="ts">
 	import { imask } from '@imask/svelte';
+
 	import { scale } from 'svelte/transition';
 
+	import type { MaskRef } from '../../types';
 	import Overlay from './Overlay.svelte';
 	import MainButton from './_ui/MainButton.svelte';
 
 	export let isPopupContactOpen: boolean;
 	export let onClose: () => void;
 
-	const options = {
-		mask: '{8}000000',
+	const nameOptions = {
+		mask: 'ФИО: N',
+		lazy: false,
+		blocks: {
+			N: {
+				mask: /^[а-яА-ЯёЁa-zA-Z\s]+$/
+			}
+		}
+	};
+
+	const phoneOptions = {
+		mask: 'Тел.: +{7}({9}00)000-00-00',
 		lazy: false
 	};
 
-	let value = '';
+	const emailOptions = {
+		mask: 'Эл.почта: N{@}D{.}Y',
+		lazy: false,
+		blocks: {
+			N: { mask: /^[a-zA-Z0-9_\.-]+$/ },
+			D: { mask: /[a-zA-Z0-9-]+$/ },
+			Y: { mask: /[a-zA-Z]+$/ }
+		}
+	};
 
-	function accept($event: CustomEvent<{ value: string }>) {
-		const maskRef = $event.detail;
+	const questionOptions = {
+		mask: 'Вопрос: N',
+		lazy: false,
+		blocks: {
+			N: {
+				mask: /^[\s\S]+$/
+			}
+		}
+	};
+
+	let nameValue = '';
+	let phoneValue = '';
+	let emailValue = '';
+	let questionValue = '';
+
+	function accept({ detail: maskRef }: { detail: MaskRef }) {
 		console.log('accept', maskRef.value);
-		value = maskRef.value;
 	}
 
-	function complete(event: CustomEvent<{ unmaskedValue: string }>) {
-		const maskRef = event.detail;
+	function complete({ detail: maskRef }: { detail: MaskRef }) {
 		console.log('complete', maskRef.unmaskedValue);
 	}
 </script>
@@ -32,12 +64,34 @@
 		<div class="popup" transition:scale={{ duration: 300 }} on:click|stopPropagation>
 			<form class="form">
 				<p class="text">Пожалуйста, представьтесь!</p>
-				<input {value} use:imask={options} on:accept={accept} on:complete={complete} />
+				<input
+					class="input"
+					type="text"
+					bind:value={nameValue}
+					use:imask={nameOptions}
+					on:accept={accept}
+					on:complete={complete}
+				/>
 
 				<div class="wrapper">
 					<p class="text">Оставьте ваши контакты для обратной связи*</p>
-					<input class="input" type="text" placeholder="Тел.: +7(9  ) " />
-					<input class="input" type="text" placeholder="Эл.почта: " />
+					<input
+						class="input"
+						type="text"
+						bind:value={phoneValue}
+						use:imask={phoneOptions}
+						on:accept={accept}
+						on:complete={complete}
+					/>
+
+					<input
+						class="input"
+						type="text"
+						bind:value={emailValue}
+						use:imask={emailOptions}
+						on:accept={accept}
+						on:complete={complete}
+					/>
 				</div>
 
 				<p class="info">
@@ -46,7 +100,13 @@
 				</p>
 
 				<p class="text">Запишите свой вопрос</p>
-				<textarea class="input" placeholder="Вопрос:" />
+				<textarea
+					class="input"
+					bind:value={questionValue}
+					use:imask={questionOptions}
+					on:accept={accept}
+					on:complete={complete}
+				/>
 
 				<MainButton text="Отправить" on:click={onClose} />
 			</form>
