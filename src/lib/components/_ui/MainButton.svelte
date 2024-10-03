@@ -10,7 +10,7 @@
 	}
 </script>
 
-<button class="button" on:click={handleClick}>
+<button type="button" class="button" on:click={handleClick}>
 	<div class="textContainer">
 		{#each text.split('') as letter, index}
 			<span class="letter" style="animation-delay: {index * 0.1}s">{letter}</span>
