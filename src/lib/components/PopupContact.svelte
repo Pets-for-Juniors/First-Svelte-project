@@ -110,6 +110,7 @@
 
 				<MainButton text="Отправить" on:click={onClose} />
 			</form>
+			<button class="closeButton" type="button" on:click={onClose}>X</button>
 		</div>
 	</Overlay>
 {/if}
@@ -200,5 +201,23 @@
 		color: var(--dark-blue);
 
 		align-self: last baseline;
+	}
+
+	.closeButton {
+		position: absolute;
+		top: 40px;
+		right: 40px;
+
+		width: 30px;
+		height: 30px;
+		padding: 0;
+
+		font-family: Inter-SemiBold, sans-serif;
+		font-size: var(--small-text);
+		color: rgb(163, 163, 163);
+
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
 	}
 </style>
