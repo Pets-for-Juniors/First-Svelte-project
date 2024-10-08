@@ -35,6 +35,17 @@
 	const onSearchClick = () => {
 		onFilterChange(modelFilter);
 	};
+
+	const onResetClick = () => {
+		modelFilter = {
+			type: undefined,
+			sex: undefined,
+			age: undefined,
+			breed: undefined
+		};
+
+		onFilterChange();
+	};
 </script>
 
 <form class="filterForm" name="filterForm">
@@ -44,7 +55,7 @@
 	<DropdownBreed selected={modelFilter?.breed} type={modelFilter?.type} {onChange} />
 
 	<button class="searchButton" type="button" on:click={onSearchClick}>Поиск</button>
-	<button class="resetButton" type="reset" on:click={() => onFilterChange()}
+	<button class="resetButton" type="reset" on:click={() => onResetClick()}
 		>Сбросить параметры</button
 	>
 </form>

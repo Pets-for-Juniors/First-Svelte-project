@@ -56,7 +56,7 @@
 		}
 
 		&:focus {
-			outline: 5px solid rgb(76, 184, 67);
+			outline: 5px solid var(--white);
 		}
 	}
 </style>

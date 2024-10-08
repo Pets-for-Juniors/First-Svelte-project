@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo.svg';
+	import cat_help from '$lib/assets/images/cat_help.png';
 	import { scale } from 'svelte/transition';
 	import Overlay from './Overlay.svelte';
 
@@ -11,7 +11,7 @@
 	<Overlay {onClose}>
 		<div class="popup" transition:scale={{ duration: 300 }} on:click|stopPropagation>
 			<p class="text">Спасибо за <span>интерес</span> к <span>нашему проекту!</span></p>
-			<img class="img" src={logo} alt="Логотип приюта Петс" />
+			<img class="img" src={cat_help} alt="Логотип приюта Петс" />
 		</div>
 	</Overlay>
 {/if}
@@ -26,6 +26,7 @@
 		flex-direction: column;
 		position: relative;
 		align-items: center;
+		justify-content: center;
 		background: var(--white);
 		border-radius: var(--border-radius-section);
 		overflow: clip;
@@ -49,6 +50,7 @@
 	}
 
 	.img {
+		margin-top: 34px;
 		width: 66%;
 		height: 62%;
 	}
