@@ -10,4 +10,18 @@ declare global {
 	}
 }
 
+declare module 'svelte/elements' {
+	export interface HTMLInputAttributes {
+		'on:accept'?: Function;
+
+		'on:complete'?: Function;
+	}
+
+	export interface HTMLTextareaAttributes {
+		'on:accept'?: Function;
+
+		'on:complete'?: Function;
+	}
+}
+
 export {};
