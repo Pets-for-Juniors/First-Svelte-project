@@ -1,5 +1,5 @@
 export class BaseDataSource<T> {
-	constructor(url: string, filterString: string, limit: number = 1000) {
+	constructor(url: string, filterString?: string, limit: number = 1000) {
 		this.url = url;
 		this.filterString = filterString;
 		this.limit = limit;

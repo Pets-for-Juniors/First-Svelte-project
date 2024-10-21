@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getAnimalAges } from '$api/api';
 	import { onMount } from 'svelte';
-	import type { AnimalAge } from '../../types/index';
+	import type { AnimalAge } from '../../types/animals';
 
 	import SelectElement from './SelectElement.svelte';
 

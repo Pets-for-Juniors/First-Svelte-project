@@ -1,5 +1,5 @@
 import { API_BASE_URL } from '../../constants/externalLinks';
-import type { Animal, AnimalFilter } from '../../types';
+import type { Animal, AnimalFilter } from '../../types/animals';
 import { BaseDataSource } from './BaseDataSource';
 
 export class AnimalDataSource extends BaseDataSource<Animal> {

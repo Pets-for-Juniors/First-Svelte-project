@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getAnimalGenders } from '$api/api';
 	import { onMount } from 'svelte';
-	import type { AnimalGender } from '../../types/index';
+	import type { AnimalGender } from '../../types/animals';
 
 	import SelectElement from './SelectElement.svelte';
 

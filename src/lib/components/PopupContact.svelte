@@ -3,7 +3,7 @@
 
 	import { scale } from 'svelte/transition';
 
-	import type { MaskRef } from '../../types';
+	import type { MaskRef } from '../../types/mask';
 	import Overlay from './Overlay.svelte';
 	import MainButton from './_ui/MainButton.svelte';
 

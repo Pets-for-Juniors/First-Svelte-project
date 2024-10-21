@@ -34,8 +34,3 @@ export type AnimalBreed = {
 	type: string;
 	breed: string;
 };
-
-export type MaskRef = {
-	value: string;
-	unmaskedValue: string;
-};

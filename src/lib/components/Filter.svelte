@@ -6,7 +6,7 @@
 		AnimalFilter,
 		AnimalGender,
 		AnimalType
-	} from '../../types/index';
+	} from '../../types/animals';
 	import DropdownAge from './DropdownAge.svelte';
 	import DropdownBreed from './DropdownBreed.svelte';
 	import DropdownSex from './DropdownSex.svelte';

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AnimalFilter } from '../../types/index';
+	import type { AnimalFilter } from '../../types/animals';
 
 	import { AnimalDataSource } from '$lib/dataSources/AnimalDataSource';
 	import { onMount } from 'svelte';
