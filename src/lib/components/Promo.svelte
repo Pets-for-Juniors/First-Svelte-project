@@ -45,7 +45,7 @@
 		display: flex;
 		border-radius: var(--border-radius-section);
 		text-align: center;
-		color: #ffd700;
+		color: var(--amber);
 		font-size: 24px;
 		background: var(--linear-turquoise);
 	}
