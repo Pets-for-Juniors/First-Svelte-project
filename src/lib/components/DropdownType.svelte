@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getAnimalTypes } from '$api/api';
+	import { getAnimalTypes } from '$api/animalApi';
 	import { onMount } from 'svelte';
 	import type { AnimalType } from '../../types/animals';
 
