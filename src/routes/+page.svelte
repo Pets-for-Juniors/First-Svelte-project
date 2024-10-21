@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AboutTeamSection from '$lib/components/AboutTeamSection.svelte';
 	import ContactUsSection from '$lib/components/ContactUsSection.svelte';
 	import FilterSection from '$lib/components/FilterSection.svelte';
 	import Header from '$lib/components/Header.svelte';
@@ -13,6 +14,7 @@
 	<Promo />
 	<FilterSection />
 	<InfoSection />
+	<AboutTeamSection />
 	<ContactUsSection />
 </Main>
 
